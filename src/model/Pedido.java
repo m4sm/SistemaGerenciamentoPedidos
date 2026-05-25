@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
-
-/**
- *
- * @author marco
- */
 
 import java.time.LocalDate;
 import repository.PedidoRepository;
@@ -79,7 +70,7 @@ public class Pedido {
     }
     
     public static Pedido consultar(int id){
-       return  repository.consultar(id);
+       return repository.consultar(id);
     }
     
     public static void excluir(int id){
