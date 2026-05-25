@@ -18,7 +18,7 @@ public class Cliente {
         this.nome = nome;
     }
 
-    // Métodos que estão no seu UML dentro da Model
+    // Métodos 
     public void incluir() {
         repository.incluir(this); // Passa o próprio cliente para o repositório salvar
     }

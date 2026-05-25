@@ -8,8 +8,14 @@ public class ClienteRepository {
 
     private List<Cliente> listaClientes = new ArrayList<>();
     
+    private int proximoId = 1; //Criando id e autoincrementando depois
+    
     public void incluir(Cliente cliente){
+        cliente.setId_cliente(proximoId);
+        
         listaClientes.add(cliente);
+        
+        proximoId++; 
     }
     
     public void alterar(Cliente cliente) {
