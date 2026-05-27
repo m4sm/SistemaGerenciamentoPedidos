@@ -9,7 +9,7 @@ public class Cliente {
     
     // Instância do repositório para a Model conseguir operar os dados
     private static ClienteRepository repository = new ClienteRepository();
-
+//oi
     // Construtores
     public Cliente() {}
 
@@ -18,7 +18,7 @@ public class Cliente {
         this.nome = nome;
     }
 
-    // Métodos que estão no seu UML dentro da Model
+    // Métodos 
     public void incluir() {
         repository.incluir(this); // Passa o próprio cliente para o repositório salvar
     }
