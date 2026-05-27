@@ -8,7 +8,7 @@ package view;
 public class PedidoView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidoView.class.getName());
-    -
+    
     public PedidoView() {
         initComponents();
     }
@@ -34,7 +34,7 @@ public class PedidoView extends javax.swing.JFrame {
         txtDataEntrega = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaDados = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 20)); // NOI18N
         jLabel1.setText("GERENCIAMENTO DE PEDIDOS");
@@ -61,6 +61,8 @@ public class PedidoView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel8.setText("ID PEDIDO");
 
+        txtIdCliente.addActionListener(this::txtIdClienteActionPerformed);
+
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel9.setText("DATA PEDIDO");
 
@@ -70,7 +72,7 @@ public class PedidoView extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel12.setText("VALOR TOTAL");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -81,7 +83,7 @@ public class PedidoView extends javax.swing.JFrame {
                 "ID PEDIDO", "ID CLIENTE", "DATA ENTREGA", "DATA PEDIDO", "VALOR TOTAL"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TabelaDados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,7 +98,7 @@ public class PedidoView extends javax.swing.JFrame {
                             .addComponent(txtIdCliente))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                             .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +126,7 @@ public class PedidoView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +174,11 @@ public class PedidoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // TODO add your handling code here:
+       
+        String texto = txtIdCliente.getText();
+        int id_cliente = Integer.parseInt(texto);
+       
+        
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -190,6 +196,10 @@ public class PedidoView extends javax.swing.JFrame {
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnListarActionPerformed
+
+    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
+      
+    }//GEN-LAST:event_txtIdClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +228,7 @@ public class PedidoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabel1;
+    private javax.swing.JTable TabelaDados;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
@@ -229,7 +240,6 @@ public class PedidoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtDataEntrega;
     private javax.swing.JTextField txtDataPedido;
     private javax.swing.JTextField txtIdCliente;

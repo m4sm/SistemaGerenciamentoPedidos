@@ -57,9 +57,11 @@ public class ClienteView extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
         tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,7 +148,27 @@ public class ClienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        // TODO add your handling code here:
+        //Abre uma janelinha pedindo o ID para o usuário
+    String entrada = javax.swing.JOptionPane.showInputDialog(this, "Digite o ID do Cliente:");
+    
+    if (entrada != null && !entrada.trim().isEmpty()) {
+        try {
+            int id = Integer.parseInt(entrada);
+            
+            //Chama a controller para buscar o cliente
+            model.Cliente clienteEncontrado = clienteController.consultarCliente(id);
+            
+            if (clienteEncontrado != null) {
+                //Se achou, preenche os campos da tela com os dados dele
+                txtId.setText(String.valueOf(clienteEncontrado.getId_cliente()));
+                txtNome.setText(clienteEncontrado.getNome());
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Cliente não encontrado!");
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, digite um ID numérico válido.");
+        }
+    }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
@@ -158,10 +180,59 @@ public class ClienteView extends javax.swing.JFrame {
         
         javax.swing.JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
         
+        
         txtNome.setText("");
         
         atualizarTabela();
     }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+    
+    //Verifica se tem um cliente carregado para alterar
+    if (txtId.getText().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Primeiro, consulte um cliente para poder alterá-lo.");
+        return;
+    }
+    
+    //Pega o ID que estava estático e o novo nome que o usuário digitou
+    int id = Integer.parseInt(txtId.getText());
+    String novoNome = txtNome.getText();
+    
+    //Cria o objeto montado com as alterações
+    model.Cliente clienteAtualizado = new model.Cliente(id, novoNome);
+    
+    //Manda para a controller atualizar
+    clienteController.alterarCliente(clienteAtualizado);
+    
+    javax.swing.JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso!");
+    
+    //Limpa a tela e atualiza a JTable
+    txtId.setText("");
+    txtNome.setText("");
+    atualizarTabela();
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    
+    //Verifica se existe um ID carregado na tela
+    if (txtId.getText().isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Primeiro, consulte um cliente para poder excluí-lo.");
+        return;
+    }
+    
+    int id = Integer.parseInt(txtId.getText());
+    
+    //Manda a controller excluir
+    clienteController.excluirCliente(id);
+    
+    javax.swing.JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+    
+    //Limpa os campos e atualiza a tabela
+    txtId.setText("");
+    txtNome.setText("");
+    atualizarTabela();
+    
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     public void atualizarTabela() {
     //Pegando o modelo da tabela que configuramos na tela
@@ -170,7 +241,7 @@ public class ClienteView extends javax.swing.JFrame {
     //Limpando as linhas antigas para não duplicar os dados na tela
     modelo.setRowCount(0);
     
-    //Puxarndo a lista atualizada lá do seu Repository (através da Controller)
+    //Puxando a lista atualizada lá do seu Repository (através da Controller)
     java.util.List<model.Cliente> lista = clienteController.listarClientes();
     
     //Rodando a lista e colocar cada cliente como uma linha na tabela
@@ -179,9 +250,7 @@ public class ClienteView extends javax.swing.JFrame {
         modelo.addRow(linha);
     }
 }
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
