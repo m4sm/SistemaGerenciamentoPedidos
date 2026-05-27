@@ -11,7 +11,7 @@ public class ClienteView extends javax.swing.JFrame {
     public ClienteView() {
         initComponents();
     }
-
+//oi
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -9,7 +9,7 @@ public class Cliente {
     
     // Instância do repositório para a Model conseguir operar os dados
     private static ClienteRepository repository = new ClienteRepository();
-
+//oi
     // Construtores
     public Cliente() {}
 

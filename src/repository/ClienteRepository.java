@@ -12,12 +12,12 @@ public class ClienteRepository {
     
     public void incluir(Cliente cliente){
         cliente.setId_cliente(proximoId);
-        
+     
         listaClientes.add(cliente);
         
         proximoId++; 
     }
-    
+    //oi
     public void alterar(Cliente cliente) {
         for (int i = 0; i < listaClientes.size(); i++) {
             if (listaClientes.get(i).getId_cliente() == cliente.getId_cliente()) {
