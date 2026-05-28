@@ -140,60 +140,96 @@ public class ProdutoView extends javax.swing.JFrame {
         btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
         btnExcluir.setText("EXCLUIR PRODUTO");
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
         btnConsultar.setText("CONSULTAR PRODUTO");
+        btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
         btnAtualizar.setText("ATUALIZAZR ESTOQUE");
+        btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIncluir)
+                    .addComponent(btnAlterar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnIncluir)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnAlterar)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnExcluir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAtualizar)
+                        .addGap(100, 100, 100))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(btnConsultar)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnAtualizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel1)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(240, 240, 240)
+                        .addComponent(btnExcluir)
+                        .addContainerGap(90, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnConsultar)
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(btnIncluir))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)))
+                .addGap(17, 17, 17)
+                .addComponent(btnConsultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIncluir)
                     .addComponent(btnAlterar)
-                    .addComponent(btnExcluir))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnConsultar)
                     .addComponent(btnAtualizar))
-                .addGap(35, 35, 35))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // TODO add your handling code here:
+        // RF05: Sugere o próximo código disponível com base nos já cadastrados
+int proximoCodigo = produtoController.getProximoCodigoDisponivel();
+jTextField1.setText(String.valueOf(proximoCodigo));
+jTextField1.setEditable(false); 
+
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
+
+jDialog1.pack();
+jDialog1.setLocationRelativeTo(this);
+jDialog1.setVisible(true);
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        int linhaSelecionada = ID_produto.getSelectedRow();
+if (linhaSelecionada == -1) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
+    return;
+}
+
+// RF06: Resgata os dados da tabela e joga nos campos do Dialog
+jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
+jTextField1.setEditable(false); 
+
+jTextField2.setText(ID_produto.getValueAt(linhaSelecionada, 1).toString()); 
+jTextField3.setText(ID_produto.getValueAt(linhaSelecionada, 2).toString()); 
+jTextField4.setText(ID_produto.getValueAt(linhaSelecionada, 3).toString()); 
+
+jDialog1.pack();
+jDialog1.setLocationRelativeTo(this);
+jDialog1.setVisible(true);
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -203,6 +239,66 @@ public class ProdutoView extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        int linhaSelecionada = ID_produto.getSelectedRow();
+if (linhaSelecionada == -1) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para excluir!");
+    return;
+}
+
+int codigo = Integer.parseInt(ID_produto.getValueAt(linhaSelecionada, 0).toString());
+String nome = ID_produto.getValueAt(linhaSelecionada, 1).toString();
+
+int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this, 
+        "Tem certeza que deseja excluir o produto: " + nome + "?", "Confirmar Exclusão", javax.swing.JOptionPane.YES_NO_OPTION);
+        
+if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+    boolean excluiu = produtoController.excluir(codigo);
+    if (excluiu) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+        btnConsultarActionPerformed(null); 
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir o produto.");
+    }
+}
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        try {
+    int codigo = Integer.parseInt(jTextField1.getText());
+    String nome = jTextField2.getText();
+    double preco = Double.parseDouble(jTextField3.getText());
+    int estoque = Integer.parseInt(jTextField4.getText());
+    
+    boolean existe = produtoController.existeProduto(codigo);
+    boolean sucesso;
+    
+    if (existe) {
+        sucesso = produtoController.alterar(codigo, nome, preco, estoque);
+    } else {
+        sucesso = produtoController.salvar(codigo, nome, preco, estoque);
+    }
+    
+    if (sucesso) {
+        javax.swing.JOptionPane.showMessageDialog(jDialog1, "Dados gravados e estoque atualizado com sucesso!");
+        jDialog1.setVisible(false); 
+        produtoController.listarEmTabela(ID_produto, ""); 
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(jDialog1, "Erro ao processar a operação.");
+    }
+    
+} catch (NumberFormatException e) {
+    javax.swing.JOptionPane.showMessageDialog(jDialog1, "Por favor, insira valores válidos em Preço e Estoque!");
+}
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        String termoBusca = javax.swing.JOptionPane.showInputDialog(this, "Digite o código ou parte do nome do produto:");
+if (termoBusca == null) return; 
+
+produtoController.listarEmTabela(ID_produto, termoBusca);
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
