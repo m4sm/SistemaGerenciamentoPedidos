@@ -1,16 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 
 public class PedidoView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidoView.class.getName());
+   private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidoView.class.getName());
     
     public PedidoView() {
         initComponents();
+        // Procure essas linhas dentro do seu initComponents() e substitua por essas:
+btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnIncluirActionPerformed(evt);
+    }
+});
+
+btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnAlterarActionPerformed(evt);
+    }
+});
+
+btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnExcluirActionPerformed(evt);
+    }
+});
+
+btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnConsultarActionPerformed(evt);
+    }
+});
+
+btnListar.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnListarActionPerformed(evt);
+    }
+});
+
+txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtIdClienteActionPerformed(evt);
+    }
+});
     }
 
     @SuppressWarnings("unchecked")
@@ -174,10 +206,25 @@ public class PedidoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-       
+      try{ 
         String texto = txtIdCliente.getText();
         int id_cliente = Integer.parseInt(texto);
-       
+      
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) TabelaDados.getModel();
+      
+        Object[] novaLinha = { id_cliente }; 
+        modelo.addRow(novaLinha);
+        txtIdCliente.setText("");
+        txtIdCliente.requestFocus();
+        } 
+      catch (NumberFormatException ex) {
+                
+        javax.swing.JOptionPane.showMessageDialog(this, 
+                "Por favor, digite um ID de cliente válido!", 
+                "Erro de Digitação", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+}
         
     }//GEN-LAST:event_btnIncluirActionPerformed
 
@@ -221,7 +268,16 @@ public class PedidoView extends javax.swing.JFrame {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new PedidoView().setVisible(true));
     }
@@ -246,4 +302,3 @@ public class PedidoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdPedido;
     private javax.swing.JTextField txtValorTotal;
     // End of variables declaration//GEN-END:variables
-}
