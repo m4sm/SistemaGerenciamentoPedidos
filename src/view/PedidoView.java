@@ -8,41 +8,6 @@ public class PedidoView extends javax.swing.JFrame {
     public PedidoView() {
         initComponents();
         // Procure essas linhas dentro do seu initComponents() e substitua por essas:
-btnIncluir.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnIncluirActionPerformed(evt);
-    }
-});
-
-btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnAlterarActionPerformed(evt);
-    }
-});
-
-btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnExcluirActionPerformed(evt);
-    }
-});
-
-btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnConsultarActionPerformed(evt);
-    }
-});
-
-btnListar.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnListarActionPerformed(evt);
-    }
-});
-
-txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        txtIdClienteActionPerformed(evt);
-    }
-});
     }
 
     @SuppressWarnings("unchecked")
