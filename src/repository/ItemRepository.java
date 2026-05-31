@@ -1,45 +1,84 @@
 package repository;
 
-import model.Item;
 import java.util.ArrayList;
 import java.util.List;
-
+import model.Item;
+import util.ArquivoUtil;
 
 public class ItemRepository {
-    private List<Item> listaItem = new ArrayList();
-    
-    public void incluir(Item item){
-        listaItem.add(item);
+
+    private final String NOME_ARQUIVO = "data/item.csv";
+
+    public ItemRepository() {
     }
-    
-    public void alterar(Item item){
-        for(Item i : listaItem){
-            if(i.getIdItem() == item.getIdItem()){
-                i.setIdItem(item.getIdItem());
-                i.setSeqItem(item.getSeqItem());
-                i.setIdProduto(item.getIdProduto());
-                i.setQtdItens(item.getQtdItens());
-                i.setPrecoUniItem(item.getPrecoUniItem());
-                i.setPrecoTotal(item.getPrecoTotal());
+
+    public ArrayList<Item> listar() {
+        ArrayList<Item> listaItens = new ArrayList<>();
+        List<String> linhas = ArquivoUtil.carregarDados(NOME_ARQUIVO);
+        
+        for (String linha : linhas) {
+            if (linha.trim().isEmpty()) {
+                continue;
             }
-            break;
+            
+            String[] colunas = linha.split(";");
+            int idItem = Integer.parseInt(colunas[0]);
+            int seqItem = Integer.parseInt(colunas[1]);
+            int idProduto = Integer.parseInt(colunas[2]);
+            int qtdItens = Integer.parseInt(colunas[3]);
+            float precoUniItem = Float.parseFloat(colunas[4]);
+            float precoTotal = Float.parseFloat(colunas[5]);
+            
+            Item item = new Item(idItem, seqItem, idProduto, qtdItens, precoUniItem, precoTotal);
+            listaItens.add(item);
         }
+        return listaItens;
     }
-    
-    public void excluir(int idItem, int seqItem){
-        listaItem.removeIf(i->i.getIdItem() == idItem && i.getSeqItem() == seqItem);
+
+    private void atualizarArquivo(ArrayList<Item> listaItens) {
+        List<String> linhasFormatoCSV = new ArrayList<>();
+        for (Item i : listaItens) {
+            String linha = i.getIdItem() + ";" +
+                           i.getSeqItem() + ";" +
+                           i.getIdProduto() + ";" +
+                           i.getQtdItens() + ";" +
+                           i.getPrecoUniItem() + ";" +
+                           i.getPrecoTotal();
+            linhasFormatoCSV.add(linha);
+        }
+        ArquivoUtil.salvarDados(NOME_ARQUIVO, linhasFormatoCSV);
     }
-    
-    public Item consultar(int id, int seqItem){
-        for( Item i : listaItem){
-            if(i.getIdItem() == id && i.getSeqItem() == seqItem){
+
+    public void incluir(Item item) {
+        ArrayList<Item> lista = listar();
+        lista.add(item);
+        atualizarArquivo(lista);
+    }
+
+    public void alterar(Item item) {
+        ArrayList<Item> lista = listar();
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getIdItem() == item.getIdItem() && lista.get(i).getSeqItem() == item.getSeqItem()) {
+                lista.set(i, item);
+                break;
+            }
+        }
+        atualizarArquivo(lista);
+    }
+
+    public void excluir(int id, int seq) {
+        ArrayList<Item> lista = listar();
+        lista.removeIf(p -> p.getIdItem() == id && p.getSeqItem() == seq);
+        atualizarArquivo(lista);
+    }
+
+    public Item consultar(int id, int seq) {
+        ArrayList<Item> lista = listar();
+        for (Item i : lista) {
+            if (i.getIdItem() == id && i.getSeqItem() == seq) {
                 return i;
             }
         }
         return null;
-    }
-    
-    public List<Item> listar(){
-        return listaItem;
     }
 }

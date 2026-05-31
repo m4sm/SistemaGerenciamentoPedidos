@@ -5,7 +5,7 @@ public class PedidoView extends javax.swing.JFrame {
    private controller.PedidoController pedidoController = new controller.PedidoController();
    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidoView.class.getName());
    private java.time.format.DateTimeFormatter fmtBR = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
-    
+   private controller.ClienteController clienteController = new controller.ClienteController(); 
    
     public PedidoView() {
         initComponents();
@@ -182,6 +182,14 @@ public class PedidoView extends javax.swing.JFrame {
             java.time.LocalDate dataPedido = java.time.LocalDate.parse(txtDataPedido.getText().trim(), fmtBR);
             java.time.LocalDate dataEntrega = java.time.LocalDate.parse(txtDataEntrega.getText().trim(), fmtBR);        
             
+            if (clienteController.consultarCliente(idCliente) == null) {
+                  javax.swing.JOptionPane.showMessageDialog(this, 
+                  "Erro: O Cliente com ID " + idCliente + " não existe cadastrado.\nNão é possível criar um pedido para ele.", 
+                  "Cliente Inválido", 
+                  javax.swing.JOptionPane.ERROR_MESSAGE);
+                  return;
+            }
+                        
             if (pedidoController.idPedidoJaExiste(idPedido)) {
                     javax.swing.JOptionPane.showMessageDialog(this, 
                     "Erro: Já existe um pedido cadastrado com o ID " + idPedido + ".\nPor favor, utilize outro número.", 
