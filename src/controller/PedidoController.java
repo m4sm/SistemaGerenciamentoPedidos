@@ -57,4 +57,15 @@ public class PedidoController {
             modelo.addRow(linha);
         }
     }
+    
+    public boolean idPedidoJaExiste(int idPedido) {
+    java.util.ArrayList<model.Pedido> lista = repository.listar();
+
+        for (model.Pedido p : lista) {
+            if (p.getIdPedido() == idPedido) {
+                return true;
+        }
+    }
+    return false;
+}
 }

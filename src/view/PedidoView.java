@@ -182,6 +182,14 @@ public class PedidoView extends javax.swing.JFrame {
             java.time.LocalDate dataPedido = java.time.LocalDate.parse(txtDataPedido.getText().trim(), fmtBR);
             java.time.LocalDate dataEntrega = java.time.LocalDate.parse(txtDataEntrega.getText().trim(), fmtBR);        
             
+            if (pedidoController.idPedidoJaExiste(idPedido)) {
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Erro: Já existe um pedido cadastrado com o ID " + idPedido + ".\nPor favor, utilize outro número.", 
+                    "ID Duplicado", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                    return;
+            }
+            
             model.Pedido p = new model.Pedido(idPedido, idCliente, dataEntrega, dataPedido, 0.0f);
         
             pedidoController.incluirPedido(p);
