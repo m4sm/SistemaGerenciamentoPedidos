@@ -1,27 +1,60 @@
 package controller;
 
 import model.Pedido;
+import repository.PedidoRepository;
 import java.util.ArrayList;
 
 public class PedidoController {
     
+    // O Controller cria uma instância do Repositório para poder usá-lo
+    private PedidoRepository repository;
+
+    public PedidoController() {
+        this.repository = new PedidoRepository();
+    }
+    
     public void incluirPedido(Pedido p){
-        p.incluir();
+        // Manda o repositório incluir no arquivo
+        repository.incluir(p);
     }
     
     public void alterarPedido(Pedido p){
-        p.alterar();
+        // Manda o repositório alterar no arquivo
+        repository.alterar(p);
     }
     
     public Pedido consultarPedido(int id){
-        return Pedido.consultar(id);
+        // Pede para o repositório buscar o pedido
+        return repository.consultar(id);
     }
     
     public void excluirPedido(int id){
-        Pedido.excluir(id);
+        // Manda o repositório excluir
+        repository.excluir(id);
     }
     
     public ArrayList<Pedido> listarPedido(){
-        return Pedido.listar();
+        return repository.listar();
+    }
+
+    public void listarEmTabela(javax.swing.JTable tabela) {
+    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tabela.getModel();
+
+    modelo.setRowCount(0);
+
+    java.util.ArrayList<model.Pedido> listaPedidos = repository.listar();
+
+    java.time.format.DateTimeFormatter fmtBR = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    for (model.Pedido p : listaPedidos) {
+        Object[] linha = new Object[] {
+            p.getIdPedido(),
+            p.getIdCliente(),
+            p.getDataPedido().format(fmtBR),   
+            p.getDataEntrega().format(fmtBR),  
+            String.format("%.2f", p.getValorTotal()) 
+        };
+            modelo.addRow(linha);
+        }
     }
 }
