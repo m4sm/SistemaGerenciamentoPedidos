@@ -3,20 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import controller.ProdutoController;
 /**
  *
  * @author guilherme
  */
 public class ProdutoView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProdutoView.class.getName());
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(ProdutoView.class.getName());
+
+    private ProdutoController produtoController;
+    private boolean modoAlteracao = false;
+
 
     /**
      * Creates new form ProdutoView
      */
     public ProdutoView() {
         initComponents();
+        produtoController = new ProdutoController();
     }
 
     /**
@@ -198,38 +204,48 @@ public class ProdutoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // RF05: Sugere o próximo código disponível com base nos já cadastrados
-int proximoCodigo = produtoController.getProximoCodigoDisponivel();
-jTextField1.setText(String.valueOf(proximoCodigo));
-jTextField1.setEditable(false); 
 
-jTextField2.setText("");
-jTextField3.setText("");
-jTextField4.setText("");
+    modoAlteracao = false;
 
-jDialog1.pack();
-jDialog1.setLocationRelativeTo(this);
-jDialog1.setVisible(true);
+    int proximoCodigo = produtoController.obterProximoCodigo();
+
+    jTextField1.setText(String.valueOf(proximoCodigo));
+    jTextField1.setEditable(false);
+
+    jTextField2.setText("");
+    jTextField3.setText("");
+    jTextField4.setText("");
+
+    jDialog1.pack();
+    jDialog1.setLocationRelativeTo(this);
+    jDialog1.setVisible(true);
+
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        int linhaSelecionada = ID_produto.getSelectedRow();
-if (linhaSelecionada == -1) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
-    return;
-}
+        modoAlteracao = true;
 
-// RF06: Resgata os dados da tabela e joga nos campos do Dialog
-jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
-jTextField1.setEditable(false); 
+    int linhaSelecionada = ID_produto.getSelectedRow();
 
-jTextField2.setText(ID_produto.getValueAt(linhaSelecionada, 1).toString()); 
-jTextField3.setText(ID_produto.getValueAt(linhaSelecionada, 2).toString()); 
-jTextField4.setText(ID_produto.getValueAt(linhaSelecionada, 3).toString()); 
+    if (linhaSelecionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Selecione um produto na tabela para alterar!"
+        );
+        return;
+    }
 
-jDialog1.pack();
-jDialog1.setLocationRelativeTo(this);
-jDialog1.setVisible(true);
+    jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
+    jTextField1.setEditable(false);
+
+    jTextField2.setText(ID_produto.getValueAt(linhaSelecionada, 1).toString());
+    jTextField3.setText(ID_produto.getValueAt(linhaSelecionada, 2).toString());
+    jTextField4.setText(ID_produto.getValueAt(linhaSelecionada, 3).toString());
+
+    jDialog1.pack();
+    jDialog1.setLocationRelativeTo(this);
+    jDialog1.setVisible(true);
+
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -254,7 +270,7 @@ int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this,
         "Tem certeza que deseja excluir o produto: " + nome + "?", "Confirmar Exclusão", javax.swing.JOptionPane.YES_NO_OPTION);
         
 if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
-    boolean excluiu = produtoController.excluir(codigo);
+    boolean excluiu = produtoController.removerProduto(codigo);
     if (excluiu) {
         javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
         btnConsultarActionPerformed(null); 
@@ -266,38 +282,92 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         try {
-    int codigo = Integer.parseInt(jTextField1.getText());
-    String nome = jTextField2.getText();
-    double preco = Double.parseDouble(jTextField3.getText());
-    int estoque = Integer.parseInt(jTextField4.getText());
-    
-    boolean existe = produtoController.existeProduto(codigo);
-    boolean sucesso;
-    
-    if (existe) {
-        sucesso = produtoController.alterar(codigo, nome, preco, estoque);
-    } else {
-        sucesso = produtoController.salvar(codigo, nome, preco, estoque);
+
+        int codigo = Integer.parseInt(jTextField1.getText());
+        String nome = jTextField2.getText();
+        double preco = Double.parseDouble(jTextField3.getText());
+        int quantidade = Integer.parseInt(jTextField4.getText());
+
+        boolean sucesso;
+
+        if (modoAlteracao) {
+
+            sucesso = produtoController.atualizarProduto(
+                    codigo,
+                    nome,
+                    preco,
+                    quantidade
+            );
+
+        } else {
+
+            sucesso = produtoController.cadastrarProduto(
+                    codigo,
+                    nome,
+                    preco,
+                    quantidade
+            );
+        }
+
+        if (sucesso) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    modoAlteracao
+                            ? "Produto alterado com sucesso!"
+                            : "Produto cadastrado com sucesso!"
+            );
+
+            jDialog1.dispose();
+
+            btnConsultarActionPerformed(null);
+
+        } else {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Dados inválidos!"
+            );
+        }
+
+    } catch (Exception e) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro: " + e.getMessage()
+        );
     }
-    
-    if (sucesso) {
-        javax.swing.JOptionPane.showMessageDialog(jDialog1, "Dados gravados e estoque atualizado com sucesso!");
-        jDialog1.setVisible(false); 
-        produtoController.listarEmTabela(ID_produto, ""); 
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(jDialog1, "Erro ao processar a operação.");
-    }
-    
-} catch (NumberFormatException e) {
-    javax.swing.JOptionPane.showMessageDialog(jDialog1, "Por favor, insira valores válidos em Preço e Estoque!");
-}
+
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        String termoBusca = javax.swing.JOptionPane.showInputDialog(this, "Digite o código ou parte do nome do produto:");
-if (termoBusca == null) return; 
+        String termoBusca = javax.swing.JOptionPane.showInputDialog(
+            this,
+            "Digite o código ou parte do nome do produto:"
+    );
 
-produtoController.listarEmTabela(ID_produto, termoBusca);
+    if (termoBusca == null) {
+        return;
+    }
+
+    java.util.List<model.Produto> produtos =
+            produtoController.listarProdutos(termoBusca);
+
+    javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel) ID_produto.getModel();
+
+    modelo.setRowCount(0);
+
+    for (model.Produto p : produtos) {
+
+    modelo.addRow(new Object[]{
+        p.getCodProduto(),
+        p.getNome(),
+        p.getPreco(),
+        p.getQuantidadeEstoque()
+    });
+}
+
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
