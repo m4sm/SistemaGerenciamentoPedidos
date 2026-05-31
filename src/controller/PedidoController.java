@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class PedidoController {
     
     // O Controller cria uma instância do Repositório para poder usá-lo
-    private PedidoRepository repository;
+    private final PedidoRepository repository;
 
     public PedidoController() {
         this.repository = new PedidoRepository();
@@ -68,4 +68,23 @@ public class PedidoController {
     }
     return false;
 }
+    public void atualizarValorTotalPedido(int idPedido) {
+        model.Pedido pedido = repository.consultar(idPedido);
+        
+        if (pedido != null) {
+            controller.ItemController itemController = new controller.ItemController();
+            java.util.ArrayList<model.Item> todosItens = itemController.listar();
+            
+            float novoValorTotal = 0.0f;
+            
+            for (model.Item item : todosItens) {
+                if (item.getIdPedido() == idPedido) { 
+                    novoValorTotal += item.getPrecoTotal();
+                }
+            }
+
+            pedido.setValorTotal(novoValorTotal); 
+            repository.alterar(pedido);
+        }
+    }
 }

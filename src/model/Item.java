@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Item{
-    public int id_item;
+    public int id_pedido;
     public int seq_item;
     public int id_produto;
     public int qtd_itens;
@@ -14,8 +14,8 @@ public class Item{
     
     private static ItemRepository repository = new ItemRepository();
     
-    public Item(int id_item, int seq_item, int id_produto, int qtd_itens, float preco_uni_item, float preco_total){
-        this.id_item = id_item;
+    public Item(int id_pedido, int seq_item, int id_produto, int qtd_itens, float preco_uni_item, float preco_total){
+        this.id_pedido = id_pedido;
         this.seq_item = seq_item;
         this.id_produto = id_produto;
         this.qtd_itens = qtd_itens;
@@ -25,8 +25,8 @@ public class Item{
     
     //Getters
     
-    public int getIdItem(){
-        return id_item;
+    public int getIdPedido(){
+        return id_pedido;
     }
     
     public int getSeqItem(){
@@ -51,7 +51,7 @@ public class Item{
     
     //Setters
      public void setIdItem(int id_item) {
-        this.id_item = id_item;
+        this.id_pedido = id_item;
     }
 
     public void setSeqItem(int seq_item) {

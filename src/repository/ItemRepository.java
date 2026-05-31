@@ -38,7 +38,7 @@ public class ItemRepository {
     private void atualizarArquivo(ArrayList<Item> listaItens) {
         List<String> linhasFormatoCSV = new ArrayList<>();
         for (Item i : listaItens) {
-            String linha = i.getIdItem() + ";" +
+            String linha = i.getIdPedido() + ";" +
                            i.getSeqItem() + ";" +
                            i.getIdProduto() + ";" +
                            i.getQtdItens() + ";" +
@@ -58,7 +58,7 @@ public class ItemRepository {
     public void alterar(Item item) {
         ArrayList<Item> lista = listar();
         for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getIdItem() == item.getIdItem() && lista.get(i).getSeqItem() == item.getSeqItem()) {
+            if (lista.get(i).getIdPedido() == item.getIdPedido() && lista.get(i).getSeqItem() == item.getSeqItem()) {
                 lista.set(i, item);
                 break;
             }
@@ -68,14 +68,14 @@ public class ItemRepository {
 
     public void excluir(int id, int seq) {
         ArrayList<Item> lista = listar();
-        lista.removeIf(p -> p.getIdItem() == id && p.getSeqItem() == seq);
+        lista.removeIf(p -> p.getIdPedido() == id && p.getSeqItem() == seq);
         atualizarArquivo(lista);
     }
 
     public Item consultar(int id, int seq) {
         ArrayList<Item> lista = listar();
         for (Item i : lista) {
-            if (i.getIdItem() == id && i.getSeqItem() == seq) {
+            if (i.getIdPedido() == id && i.getSeqItem() == seq) {
                 return i;
             }
         }

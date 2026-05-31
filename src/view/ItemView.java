@@ -59,7 +59,7 @@ public class ItemView extends javax.swing.JFrame {
         jLabel1.setText("GERENCIAMENTO DE ITENS");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("ID ITEM");
+        jLabel2.setText("Sequência de Itens");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("ID PRODUTO");
@@ -98,34 +98,30 @@ public class ItemView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(204, 204, 204))
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(55, 55, 55)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtPrecoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtIdItem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtIdItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)
-                                .addComponent(txtIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(65, 65, 65)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtQtdItens)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtPrecoUni)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(txtQtdItens, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPrecoUni, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(txtPrecoTotal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -225,7 +221,7 @@ public class ItemView extends javax.swing.JFrame {
             }
 
             if (qtdItens > produto.getQuantidadeEstoque()) { 
-                javax.swing.JOptionPane.showMessageDialog(this, "Erro: Quantidade indisponível no estoque. Estoque atual: " + produto.getQuantidade(), "Estoque Insuficiente", javax.swing.JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: Quantidade indisponível no estoque. Estoque atual: " + produto.getQuantidadeEstoque(), "Estoque Insuficiente", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -290,15 +286,92 @@ public class ItemView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-       
+       try {
+            int idPedido = Integer.parseInt(txtIdPedido.getText().trim());
+            int seqItem = Integer.parseInt(txtIdItem.getText().trim());
+
+            Item item = itemController.consultar(idPedido, seqItem);
+            if (item != null) {
+                txtIdProduto.setText(String.valueOf(item.getIdProduto()));
+                txtQtdItens.setText(String.valueOf(item.getQtdItens()));
+                txtPrecoUni.setText(String.format("%.2f", item.getPrecoUniItem()));
+                txtPrecoTotal.setText(String.format("%.2f", item.getPrecoTotal()));
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Item não cadastrado com esta combinação de chaves.", "Não Encontrado", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } 
+            catch (NumberFormatException e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Preencha ID Pedido e ID Item (Seq) para consultar.", "Campos Inválidos", javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        // TODO add your handling code here:
+        java.util.ArrayList<Item> lista = itemController.listar();
+        StringBuilder sb = new StringBuilder("--- ITENS CADASTRADOS ---\n");
+        for (Item i : lista) {
+            sb.append("Pedido: ").append(i.getIdPedido())
+              .append(" | Seq: ").append(i.getSeqItem())
+              .append(" | Produto: ").append(i.getIdProduto())
+              .append(" | Qtd: ").append(i.getQtdItens())
+              .append(" | Total: R$ ").append(String.format("%.2f", i.getPrecoTotal()))
+              .append("\n");
+        }
+        javax.swing.JOptionPane.showMessageDialog(this, new javax.swing.JTextArea(sb.toString()));
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+            try {
+                int idPedido = Integer.parseInt(txtIdPedido.getText().trim());
+                int seqItem = Integer.parseInt(txtIdItem.getText().trim());
+                int idProduto = Integer.parseInt(txtIdProduto.getText().trim());
+                int qtdItens = Integer.parseInt(txtQtdItens.getText().trim()); // Voltando para txtQtdItens
+
+                Item itemAntigo = itemController.consultar(idPedido, seqItem);
+                
+                if (itemAntigo == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: Este item não existe para ser alterado.", "Item Inexistente", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+                }
+
+                java.util.List<Produto> resultado = produtoController.listarProdutos(String.valueOf(idProduto));
+                Produto produto = null;
+                for (Produto p : resultado) {
+                    if (p.getCodProduto() == idProduto) {
+                    produto = p;
+                    break;
+                    }
+            }
+
+            if (produto == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: O Produto informado não existe.", "Produto Inválido", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int estoqueSimulado = produto.getQuantidadeEstoque() + itemAntigo.getQtdItens();
+            if (qtdItens > estoqueSimulado) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: Quantidade indisponível. Estoque máximo com devolução: " + estoqueSimulado, "Estoque Insuficiente", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            double precoUni = produto.getPreco();
+            double precoTotal = precoUni * qtdItens;
+
+            txtPrecoUni.setText(String.format("%.2f", precoUni));
+            txtPrecoTotal.setText(String.format("%.2f", precoTotal));
+
+            int estoqueFinal = estoqueSimulado - qtdItens;
+            produtoController.atualizarProduto(produto.getCodProduto(), produto.getNome(), produto.getPreco(), estoqueFinal);
+
+            Item itemAlterado = new Item(idPedido, seqItem, idProduto, qtdItens, (float) precoUni, (float) precoTotal);
+            itemController.alterar(itemAlterado);
+
+            pedidoController.atualizarValorTotalPedido(idPedido);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Item altered e estoque recalculado com sucesso!");
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Preencha todos os campos corretamente para efetuar a alteração.", "Erro de Dados", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**

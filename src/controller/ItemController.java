@@ -31,7 +31,7 @@ public class ItemController {
     public boolean itemJaExiste(int idItem, int seqItem) {
         ArrayList<Item> lista = itemRepository.listar();
         for (Item i : lista) {
-            if (i.getIdItem() == idItem && i.getSeqItem() == seqItem) {
+            if (i.getIdPedido() == idItem && i.getSeqItem() == seqItem) {
                 return true;
             }
         }
@@ -46,7 +46,7 @@ public class ItemController {
         
         for (Item i : listaItens) {
             Object[] linha = new Object[] {
-                i.getIdItem(),
+                i.getIdPedido(),
                 i.getSeqItem(),
                 i.getIdProduto(),
                 i.getQtdItens(),

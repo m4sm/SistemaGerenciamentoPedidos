@@ -60,6 +60,10 @@ public class Pedido {
         this.data_pedido = data_pedido;
     }
     
+    public void setValorTotal(float valor_total){
+        this.valor_total = valor_total;
+    }
+    
     //Funções
     public void incluir(){
         repository.incluir(this);
