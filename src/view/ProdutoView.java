@@ -226,15 +226,6 @@ public class ProdutoView extends javax.swing.JFrame {
     jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
     jTextField1.setEditable(false); 
 
-
-    if (linhaSelecionada == -1) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Selecione um produto na tabela para alterar!"
-        );
-        return;
-    }
-
     jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
     jTextField1.setEditable(false);
 
@@ -348,28 +339,26 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
     if (termoBusca == null) {
         return;
     }
-
-    java.util.List<model.Produto> produtos =
-            produtoController.listarProdutos(termoBusca);
-
-    javax.swing.table.DefaultTableModel modelo =
-            (javax.swing.table.DefaultTableModel) ID_produto.getModel();
-
-    modelo.setRowCount(0);
-
-    for (model.Produto p : produtos) {
-
-        modelo.addRow(new Object[]{
-            p.getCodProduto(),
-            p.getNome(),
-            p.getPreco(),
-            p.getQuantidadeEstoque()
-        });
-    }
-        produtoController.listarEmTabela(ID_produto, termoBusca);
+        preencherTabela(termoBusca);
 
     }//GEN-LAST:event_btnConsultarActionPerformed
 
+    private void preencherTabela(String termoBusca) {
+    //Puxa a lista limpa da controller usando o termo de busca
+    java.util.List<model.Produto> lista = produtoController.listarProdutos(termoBusca);
+
+    //Pega o modelo da tabela
+    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) ID_produto.getModel();
+
+    //Limpa as linhas antigas
+    modelo.setRowCount(0);
+
+    //Joga os dados na tabela
+    for (model.Produto p : lista) {
+        Object[] linha = { p.getCodProduto(), p.getNome(), p.getPreco(), p.getQuantidadeEstoque() };
+        modelo.addRow(linha);
+    }
+}
     /**
      * @param args the command line arguments
      */
