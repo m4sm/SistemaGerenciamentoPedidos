@@ -11,7 +11,8 @@ package view;
 public class ProdutoView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProdutoView.class.getName());
-
+    
+    private controller.ProdutoController produtoController = new controller.ProdutoController();
     /**
      * Creates new form ProdutoView
      */
@@ -198,28 +199,28 @@ public class ProdutoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // RF05: Sugere o próximo código disponível com base nos já cadastrados
-int proximoCodigo = produtoController.getProximoCodigoDisponivel();
-jTextField1.setText(String.valueOf(proximoCodigo));
-jTextField1.setEditable(false); 
+        //Sugere o próximo código disponível com base nos já cadastrados
+        int proximoCodigo = produtoController.getProximoCodigoDisponivel();
+        jTextField1.setText(String.valueOf(proximoCodigo));
+        jTextField1.setEditable(false); 
 
-jTextField2.setText("");
-jTextField3.setText("");
-jTextField4.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
 
-jDialog1.pack();
-jDialog1.setLocationRelativeTo(this);
-jDialog1.setVisible(true);
+        jDialog1.pack();
+        jDialog1.setLocationRelativeTo(this);
+        jDialog1.setVisible(true);
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int linhaSelecionada = ID_produto.getSelectedRow();
-if (linhaSelecionada == -1) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
-    return;
-}
+        if (linhaSelecionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
+            return;
+        }
 
-// RF06: Resgata os dados da tabela e joga nos campos do Dialog
+//Resgata os dados da tabela e joga nos campos do Dialog
 jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
 jTextField1.setEditable(false); 
 
@@ -295,9 +296,9 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         String termoBusca = javax.swing.JOptionPane.showInputDialog(this, "Digite o código ou parte do nome do produto:");
-if (termoBusca == null) return; 
+        if (termoBusca == null) return; 
 
-produtoController.listarEmTabela(ID_produto, termoBusca);
+        produtoController.listarEmTabela(ID_produto, termoBusca);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
