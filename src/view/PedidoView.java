@@ -182,14 +182,13 @@ public class PedidoView extends javax.swing.JFrame {
         txtIdCliente.setText("");
         txtIdCliente.requestFocus();
         } 
-      catch (NumberFormatException ex) {
+        catch (NumberFormatException ex) {
                 
         javax.swing.JOptionPane.showMessageDialog(this, 
                 "Por favor, digite um ID de cliente válido!", 
                 "Erro de Digitação", 
                 javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
-}
+        }
         
     }//GEN-LAST:event_btnIncluirActionPerformed
 
