@@ -7,7 +7,7 @@ import java.util.List;
 import model.Pedido;
 
 public class PedidoRepository {
-    private final String NOME_ARQUIVO = "./data/pedido.csv";
+    private final String NOME_ARQUIVO = "data/pedido.csv";
     
     public ArrayList<Pedido> listar(){
         ArrayList<Pedido> listaPedidos = new ArrayList();
