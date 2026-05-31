@@ -12,12 +12,12 @@ public class ProdutoController {
         this.repository = new ProdutoRepository();
     }
 
-    // RF05 - Obter sugestão de próximo código para mandar para a tela
+    //Obter sugestão de próximo código para mandar para a tela
     public int obterProximoCodigo() {
         return repository.sugerirProximoCodigo();
     }
 
-    // RF05 - Cadastrar Produto com validações básicas de negócio
+    //Cadastrar Produto com validações básicas de negócio
     public boolean cadastrarProduto(int codigo, String nome, double preco, int quantidade) {
         if (nome == null || nome.trim().isEmpty() || preco <= 0 || quantidade < 0) {
             return false; // Retorna falso se os dados forem inválidos
@@ -27,7 +27,7 @@ public class ProdutoController {
         return true;
     }
 
-    // RF06 - Atualizar Produto existente
+    //Atualizar Produto existente
     public boolean atualizarProduto(int codigo, String nome, double preco, int quantidade) {
         if (nome == null || nome.trim().isEmpty() || preco <= 0 || quantidade < 0) {
             return false;
@@ -36,12 +36,12 @@ public class ProdutoController {
         return repository.alterar(produto);
     }
 
-    // RF07 - Remover Produto por código
+    //Remover Produto por código
     public boolean removerProduto(int codigo) {
         return repository.excluir(codigo);
     }
 
-    // RF08 - Listar e filtrar produtos para a tabela da View
+    //Listar e filtrar produtos para a tabela da View
     public List<Produto> listarProdutos(String termoBusca) {
         return repository.consultar(termoBusca);
     }
