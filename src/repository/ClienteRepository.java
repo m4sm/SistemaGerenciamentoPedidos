@@ -7,17 +7,17 @@ import util.ArquivoUtil;
 
 public class ClienteRepository {
     
+    public ClienteRepository() {
+        carregarDoArquivo();
+    }
 
     private List<Cliente> listaClientes = new ArrayList<>();
     
     private int proximoId = 1; //Criando id e autoincrementando depois
 
-    public ClienteRepository() {
-        carregarDoArquivo();
-    }
     
     private void carregarDoArquivo(){
-       List<String> linhas = ArquivoUtil.carregarDados("clientes.csv");
+       List<String> linhas = ArquivoUtil.carregarDados("data/clientes.csv");
        
        int maiorId = 0;
        
@@ -28,7 +28,8 @@ public class ClienteRepository {
                int id = Integer.parseInt(dados[0]);
                String nome = dados[1];
                
-               Cliente c = new Cliente(id,nome);
+               model.Cliente c = new Cliente(id,nome);
+               listaClientes.add(c);
                
                //Monitorando o maior id pro autoincremento não se perder
                if(id > maiorId){
@@ -48,7 +49,7 @@ public class ClienteRepository {
             linhas.add(linha);
         }
         
-        ArquivoUtil.salvarDados("clientes.csv", linhas);
+        ArquivoUtil.salvarDados("data/clientes.csv", linhas);
     }
     
     public void incluir(Cliente cliente){
