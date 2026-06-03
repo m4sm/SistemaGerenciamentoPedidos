@@ -36,13 +36,14 @@ public class ProdutoView extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         ID_produto = new javax.swing.JTable();
+        btnIncluirConfirmar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnIncluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("GERENCIAMENTO DE PRODUTOS");
 
@@ -55,6 +56,8 @@ public class ProdutoView extends javax.swing.JFrame {
         jTextField2.addActionListener(this::jTextField2ActionPerformed);
 
         jLabel5.setText("PREÇO");
+
+        jTextField3.addActionListener(this::jTextField3ActionPerformed);
 
         jLabel6.setText("REMESSA");
 
@@ -71,34 +74,44 @@ public class ProdutoView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(ID_produto);
 
+        btnIncluirConfirmar.setText("Incluir ");
+        btnIncluirConfirmar.addActionListener(this::btnIncluirConfirmarActionPerformed);
+
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1))
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(141, 141, 141)
-                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING))))
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIncluirConfirmar)
+                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jDialog1Layout.createSequentialGroup()
+                                    .addGap(31, 31, 31)
+                                    .addComponent(jLabel5))
+                                .addGroup(jDialog1Layout.createSequentialGroup()
+                                    .addGap(22, 22, 22)
+                                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3))))
+                            .addGap(150, 150, 150)
+                            .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jDialog1Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jDialog1Layout.createSequentialGroup()
+                            .addGap(73, 73, 73)
+                            .addComponent(jLabel2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,9 +123,9 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -123,8 +136,12 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIncluirConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,7 +150,7 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel1.setText("Gerenciamento de Produtos");
 
         btnIncluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnIncluir.setText("Incluir");
+        btnIncluir.setText("Adicionar");
         btnIncluir.addActionListener(this::btnIncluirActionPerformed);
 
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -149,10 +166,8 @@ public class ProdutoView extends javax.swing.JFrame {
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
         btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtualizar.setText("Atualizar Estoque");
+        btnAtualizar.setText("Listar");
         btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
-
-        jButton1.setText("Listar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,12 +183,10 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(btnAtualizar))
+                .addComponent(btnAtualizar)
                 .addGap(30, 30, 30)
                 .addComponent(btnExcluir)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -190,9 +203,7 @@ public class ProdutoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtualizar)
                     .addComponent(btnExcluir))
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,20 +211,18 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
 
-        //Sugere o próximo código disponível com base nos já cadastrados
-        int proximoCodigo = produtoController.obterProximoCodigo();
-        jTextField1.setText(String.valueOf(proximoCodigo));
-        jTextField1.setEditable(false); 
+       int proximoCodigo = produtoController.obterProximoCodigo();
+jTextField1.setText(String.valueOf(proximoCodigo));
+jTextField1.setEditable(false); 
 
-        modoAlteracao = false;
-        jTextField2.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        
-        jDialog1.pack();
-        jDialog1.setLocationRelativeTo(this);
-        jDialog1.setVisible(true);
+modoAlteracao = false;
+jTextField2.setText("");
+jTextField3.setText("");
+jTextField4.setText("");
 
+jDialog1.pack();
+jDialog1.setLocationRelativeTo(this);
+jDialog1.setVisible(true);
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -277,62 +286,7 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        try {
-
-        int codigo = Integer.parseInt(jTextField1.getText());
-        String nome = jTextField2.getText();
-        double preco = Double.parseDouble(jTextField3.getText());
-        int quantidade = Integer.parseInt(jTextField4.getText());
-
-        boolean sucesso;
-
-        if (modoAlteracao) {
-
-            sucesso = produtoController.atualizarProduto(
-                    codigo,
-                    nome,
-                    preco,
-                    quantidade
-            );
-
-        } else {
-
-            sucesso = produtoController.cadastrarProduto(
-                    codigo,
-                    nome,
-                    preco,
-                    quantidade
-            );
-        }
-
-        if (sucesso) {
-
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    modoAlteracao
-                            ? "Produto alterado com sucesso!"
-                            : "Produto cadastrado com sucesso!"
-            );
-
-            jDialog1.dispose();
-
-            btnConsultarActionPerformed(null);
-
-        } else {
-
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Dados inválidos!"
-            );
-        }
-
-    } catch (Exception e) {
-
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Erro: " + e.getMessage()
-        );
-    }
+        preencherTabela(""); // Passa vazio para listar tudo sem filtro
 
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
@@ -347,6 +301,38 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
         preencherTabela(termoBusca);
 
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void btnIncluirConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirConfirmarActionPerformed
+try {
+    int codigo = Integer.parseInt(jTextField1.getText());
+    String nome = jTextField2.getText();
+    double preco = Double.parseDouble(jTextField3.getText());
+    int quantidade = Integer.parseInt(jTextField4.getText());
+
+    boolean sucesso;
+
+    if (modoAlteracao) {
+        sucesso = produtoController.atualizarProduto(codigo, nome, preco, quantidade);
+    } else {
+        sucesso = produtoController.cadastrarProduto(codigo, nome, preco, quantidade);
+    }
+
+    if (sucesso) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+                modoAlteracao ? "Produto alterado com sucesso!" : "Produto cadastrado com sucesso!");
+        jDialog1.dispose();
+        preencherTabela(""); 
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Dados inválidos!");
+    }
+} catch (Exception e) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIncluirConfirmarActionPerformed
 
     private void preencherTabela(String termoBusca) {
     //Puxa a lista limpa da controller usando o termo de busca
@@ -388,7 +374,7 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new ProdutoView().setVisible(true));
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ID_produto;
     private javax.swing.JButton btnAlterar;
@@ -396,6 +382,7 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnIncluir;
+    private javax.swing.JButton btnIncluirConfirmar;
     private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
