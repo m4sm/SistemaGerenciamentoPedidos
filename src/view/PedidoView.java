@@ -9,7 +9,7 @@ public class PedidoView extends javax.swing.JFrame {
    
     public PedidoView() {
         initComponents();
-        // Procure essas linhas dentro do seu initComponents() e substitua por essas:
+       
         txtValorTotal.setEditable(false);
         txtValorTotal.setText("0.0");
         
@@ -40,43 +40,62 @@ public class PedidoView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaDados = new javax.swing.JTable();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 20)); // NOI18N
         jLabel1.setText("GERENCIAMENTO DE PEDIDOS");
         jLabel1.setToolTipText("");
 
+        btnIncluir.setBackground(new java.awt.Color(0, 204, 102));
+        btnIncluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnIncluir.setForeground(new java.awt.Color(255, 255, 255));
         btnIncluir.setText("INCLUIR");
         btnIncluir.addActionListener(this::btnIncluirActionPerformed);
     
 
+    btnAlterar.setBackground(new java.awt.Color(57, 82, 39));
+    btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
     btnAlterar.setText("ALTERAR");
     btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
+    btnExcluir.setBackground(new java.awt.Color(102, 0, 0));
+    btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
     btnExcluir.setText("EXCLUIR");
     btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
+    btnConsultar.setBackground(new java.awt.Color(51, 0, 102));
+    btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
     btnConsultar.setText("CONSULTAR");
     btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
+    btnListar.setBackground(new java.awt.Color(153, 153, 0));
+    btnListar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btnListar.setForeground(new java.awt.Color(255, 255, 255));
     btnListar.setText("LISTAR");
     btnListar.addActionListener(this::btnListarActionPerformed);
 
     JLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-    JLabel1.setText("ID_CLIENTE");
+    JLabel1.setText("ID Cliente");
 
     jLabel8.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-    jLabel8.setText("ID PEDIDO");
+    jLabel8.setText("ID Pedido");
 
     txtIdCliente.addActionListener(this::txtIdClienteActionPerformed);
 
     jLabel9.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-    jLabel9.setText("DATA PEDIDO");
+    jLabel9.setText("Data Pedido");
 
     jLabel11.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-    jLabel11.setText("DATA ENTREGA");
+    jLabel11.setText("Data Entrega");
 
     jLabel12.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-    jLabel12.setText("VALOR TOTAL");
+    jLabel12.setText("Valor Total");
 
+    TabelaDados.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
     TabelaDados.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
             {null, null, null, null, null},
@@ -95,40 +114,44 @@ public class PedidoView extends javax.swing.JFrame {
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGap(31, 31, 31)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(JLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtIdCliente))
-                    .addGap(32, 32, 32)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                        .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btnIncluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(31, 31, 31)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
+                            .addGap(117, 117, 117)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1)))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel12)
+                        .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(34, 34, 34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(41, 41, 41)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(jLabel12)
-                .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtDataPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel9))))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addComponent(txtDataPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JLabel1))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(31, 31, 31)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(60, 60, 60))
+            .addGap(35, 35, 35))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,21 +177,21 @@ public class PedidoView extends javax.swing.JFrame {
                         .addComponent(txtDataPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel12)
-                    .addGap(8, 8, 8)
+                    .addGap(2, 2, 2)
                     .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(34, 34, 34)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(34, 34, 34)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
