@@ -241,31 +241,59 @@ public class PedidoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-    int linhaSelecionada = TabelaDados.getSelectedRow();
-    
+        int linhaSelecionada = TabelaDados.getSelectedRow();
+        
         if (linhaSelecionada == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Selecione uma linha na tabela para alterar.");
             return;
         }
-    
+        
         try {
-            int idPedido = Integer.parseInt(txtIdPedido.getText().trim());
-            int idCliente = Integer.parseInt(txtIdCliente.getText().trim());
-            java.time.LocalDate dataPedido = java.time.LocalDate.parse(txtDataPedido.getText().trim(), fmtBR);
-            java.time.LocalDate dataEntrega = java.time.LocalDate.parse(txtDataEntrega.getText().trim(), fmtBR);
-        
-            float valorTotalAtual = Float.parseFloat(TabelaDados.getValueAt(linhaSelecionada, 4).toString());
-        
+            String txtId = txtIdPedido.getText().trim();
+            int idPedido = txtId.isEmpty() 
+                ? Integer.parseInt(TabelaDados.getValueAt(linhaSelecionada, 0).toString()) 
+                : Integer.parseInt(txtId);
+
+            String txtIdCli = txtIdCliente.getText().trim();
+            int idCliente = txtIdCli.isEmpty() 
+                ? Integer.parseInt(TabelaDados.getValueAt(linhaSelecionada, 1).toString()) 
+                : Integer.parseInt(txtIdCli);
+
+            String txtDataEnt = txtDataEntrega.getText().trim();
+            String dataEntregaTexto = txtDataEnt.isEmpty() 
+                ? TabelaDados.getValueAt(linhaSelecionada, 2).toString() 
+                : txtDataEnt;
+            java.time.LocalDate dataEntrega = java.time.LocalDate.parse(dataEntregaTexto, fmtBR);
+
+            String txtDataPed = txtDataPedido.getText().trim();
+            String dataPedidoTexto = txtDataPed.isEmpty() 
+                ? TabelaDados.getValueAt(linhaSelecionada, 3).toString() 
+                : txtDataPed;
+            java.time.LocalDate dataPedido = java.time.LocalDate.parse(dataPedidoTexto, fmtBR);
+
+            java.text.NumberFormat nf = java.text.NumberFormat.getInstance(new java.util.Locale("pt", "BR"));
+            String valorTexto = TabelaDados.getValueAt(linhaSelecionada, 4).toString();
+            float valorTotalAtual = nf.parse(valorTexto).floatValue();
+
             model.Pedido p = new model.Pedido(idPedido, idCliente, dataEntrega, dataPedido, valorTotalAtual);
             pedidoController.alterarPedido(p);
-        
+            
             javax.swing.JOptionPane.showMessageDialog(this, "Pedido alterado com sucesso!");
             pedidoController.listarEmTabela(TabelaDados);
-        
-        } 
-            catch (Exception ex) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao alterar. Verifique os dados introduzidos.");
+
+            txtIdPedido.setText("");
+            txtIdCliente.setText("");
+            txtDataPedido.setText("");
+            txtDataEntrega.setText("");
+            
+        } catch (java.text.ParseException e) {
+             javax.swing.JOptionPane.showMessageDialog(this, "Erro de formatação no valor total: " + e.getMessage());
+        } catch (java.time.format.DateTimeParseException e) {
+             javax.swing.JOptionPane.showMessageDialog(this, "Erro: Verifique se as datas estão no formato DD/MM/AAAA.");
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao alterar. Detalhes: " + ex.getMessage());
         }
+    
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
