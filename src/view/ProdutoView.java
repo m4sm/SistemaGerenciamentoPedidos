@@ -42,6 +42,7 @@ public class ProdutoView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel2.setText("GERENCIAMENTO DE PRODUTOS");
 
@@ -127,67 +128,71 @@ public class ProdutoView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("GERENCIAMENTO DE PRODUTOS");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Gerenciamento de Produtos");
 
-        btnIncluir.setText("INCLUIR PRODUTO");
+        btnIncluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnIncluir.setText("Incluir");
         btnIncluir.addActionListener(this::btnIncluirActionPerformed);
 
-        btnAlterar.setText("ALTERAR PRODUTO");
+        btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
-        btnExcluir.setText("EXCLUIR PRODUTO");
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
-        btnConsultar.setText("CONSULTAR PRODUTO");
+        btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
-        btnAtualizar.setText("ATUALIZAZR ESTOQUE");
+        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAtualizar.setText("Atualizar Estoque");
         btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
+
+        jButton1.setText("Listar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnIncluir)
-                    .addComponent(btnAlterar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAtualizar)
-                        .addGap(100, 100, 100))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
-                        .addComponent(btnExcluir)
-                        .addContainerGap(90, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConsultar)
-                    .addComponent(jLabel1))
+                .addGap(23, 23, 23)
+                .addComponent(btnIncluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConsultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAlterar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(btnAtualizar))
+                .addGap(30, 30, 30)
+                .addComponent(btnExcluir)
+                .addContainerGap(69, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(btnIncluir))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExcluir)))
-                .addGap(17, 17, 17)
-                .addComponent(btnConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(111, 111, 111)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAlterar)
-                    .addComponent(btnAtualizar))
-                .addContainerGap(123, Short.MAX_VALUE))
+                    .addComponent(btnIncluir)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnAlterar))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAtualizar)
+                    .addComponent(btnExcluir))
+                .addGap(35, 35, 35)
+                .addComponent(jButton1)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -391,6 +396,7 @@ if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnIncluir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

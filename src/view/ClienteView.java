@@ -51,18 +51,22 @@ public class ClienteView extends javax.swing.JFrame {
 
         txtNome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        btnIncluir.setBackground(new java.awt.Color(153, 255, 255));
         btnIncluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIncluir.setText("Incluir");
         btnIncluir.addActionListener(this::btnIncluirActionPerformed);
 
+        btnConsultar.setBackground(new java.awt.Color(255, 255, 153));
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
+        btnAlterar.setBackground(new java.awt.Color(153, 255, 153));
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
+        btnExcluir.setBackground(new java.awt.Color(255, 102, 102));
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(this::btnExcluirActionPerformed);
