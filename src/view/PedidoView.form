@@ -137,9 +137,9 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="sansserif" size="20" style="1"/>
+          <Font name="sansserif" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="GERENCIAMENTO DE PEDIDOS"/>
+        <Property name="text" type="java.lang.String" value="Gerenciamento de Pedidos"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>

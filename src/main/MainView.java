@@ -15,9 +15,9 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnPainelCliente = new javax.swing.JButton();
-        btnPainelProduto = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnProdutos = new javax.swing.JButton();
+        btnPedidos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -25,16 +25,17 @@ public class MainView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sistema de Gerenciamento de Pedidos");
 
-        btnPainelCliente.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPainelCliente.setText("Painel do Cliente");
-        btnPainelCliente.addActionListener(this::btnPainelClienteActionPerformed);
+        btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnClientes.setText("Gerenciar Clientes");
+        btnClientes.addActionListener(this::btnClientesActionPerformed);
 
-        btnPainelProduto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnPainelProduto.setText("Painel do Produto");
-        btnPainelProduto.addActionListener(this::btnPainelProdutoActionPerformed);
+        btnProdutos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnProdutos.setText("Gerenciar Produtos");
+        btnProdutos.addActionListener(this::btnProdutosActionPerformed);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Painel do Pedido");
+        btnPedidos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPedidos.setText("Gerenciar Pedidos");
+        btnPedidos.addActionListener(this::btnPedidosActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -44,9 +45,9 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPainelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPainelProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -55,52 +56,48 @@ public class MainView extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addGap(114, 114, 114)
-                .addComponent(btnPainelCliente)
+                .addComponent(btnClientes)
                 .addGap(52, 52, 52)
-                .addComponent(btnPainelProduto)
+                .addComponent(btnProdutos)
                 .addGap(62, 62, 62)
-                .addComponent(jButton1)
+                .addComponent(btnPedidos)
                 .addContainerGap(160, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPainelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPainelClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPainelClienteActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        view.ClienteView telaCliente = new view.ClienteView();
+        telaCliente.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        telaCliente.setLocationRelativeTo(null);
+        telaCliente.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
 
-    private void btnPainelProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPainelProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPainelProdutoActionPerformed
+    private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
+        view.ProdutoView telaProduto = new view.ProdutoView();
+        telaProduto.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        telaProduto.setLocationRelativeTo(null);
+        telaProduto.setVisible(true);
+    }//GEN-LAST:event_btnProdutosActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        view.PedidoView telaPedido = new view.PedidoView();
+        telaPedido.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        telaPedido.setLocationRelativeTo(null);
+        telaPedido.setVisible(true);
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(() -> new MainView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPainelCliente;
-    private javax.swing.JButton btnPainelProduto;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnProdutos;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
