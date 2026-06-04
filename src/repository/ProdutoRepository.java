@@ -1,22 +1,27 @@
 package repository;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
-import util.ArquivoUtil; // Importando a classe que seus colegas fizeram
+import util.ArquivoUtil;
 
 public class ProdutoRepository {
     
     private static List<Produto> listaProdutos = new ArrayList<>();
-    private static final String NOME_ARQUIVO = "data/produtos.csv";
+    
+    // CAMINHO DINÂMICO: Descobre onde a pasta do projeto está rodando em qualquer PC
+    private static final String NOME_ARQUIVO = System.getProperty("user.dir") 
+            + File.separator + "data" + File.separator + "produtos.csv";
 
-    
-    
+    // O bloco static continua aqui para a primeira carga do sistema
     static {
         carregarDoArquivo();
     }
 
     public int sugerirProximoCodigo() {
+        // Força ler o arquivo antes de sugerir o ID para evitar duplicados entre PCs
+        carregarDoArquivo(); 
         int maiorCodigo = 0;
         for (Produto p : listaProdutos) {
             if (p.getCodProduto() > maiorCodigo) {
@@ -27,18 +32,20 @@ public class ProdutoRepository {
     }
 
     public void salvar(Produto produto) {
+        carregarDoArquivo(); // Puxa os dados atualizados antes de inserir um novo
         listaProdutos.add(produto);
-        salvarNoArquivo(); // Atualiza o arquivo CSV após salvar
+        salvarNoArquivo(); 
     }
 
     public boolean alterar(Produto produtoAlterado) {
+        carregarDoArquivo(); // Garante que está alterando a lista mais recente
         for (Produto p : listaProdutos) {
             if (p.getCodProduto() == produtoAlterado.getCodProduto()) {
                 p.setNome(produtoAlterado.getNome());
                 p.setPreco(produtoAlterado.getPreco());
                 p.setQuantidadeEstoque(produtoAlterado.getQuantidadeEstoque());
                 
-                salvarNoArquivo(); // Atualiza o arquivo CSV após alterar
+                salvarNoArquivo(); 
                 return true;
             }
         }
@@ -46,14 +53,18 @@ public class ProdutoRepository {
     }
 
     public boolean excluir(int codProduto) {
+        carregarDoArquivo(); // Garante que está excluindo da lista mais recente
         boolean removido = listaProdutos.removeIf(p -> p.getCodProduto() == codProduto);
         if (removido) {
-            salvarNoArquivo(); // Atualiza o arquivo CSV após excluir
+            salvarNoArquivo(); 
         }
         return removido;
     }
 
     public List<Produto> consultar(String termoBusca) {
+        // CORREÇÃO CRUCIAL: Toda vez que listar ou consultar, lê o arquivo CSV do disco novamente
+        carregarDoArquivo(); 
+        
         if (termoBusca == null || termoBusca.trim().isEmpty()) {
             return listaProdutos;
         }
@@ -67,20 +78,10 @@ public class ProdutoRepository {
         return resultado;
     }
 
-    
-    // INTEGRAÇÃO COM O ARQUIVO CSV
-    
-
-    /**
-     * Transforma a lista de produtos em Strings e salva usando o ArquivoUtil
-     */
     private static void salvarNoArquivo() {
         List<String> linhas = new ArrayList<>();
-        
-        // Adiciona o cabeçalho do arquivo CSV (usando ";" como separador)
         linhas.add("codProduto;nome;preco;quantidadeEstoque");
         
-        // Converte cada produto em uma linha de texto separada por ";"
         for (Produto p : listaProdutos) {
             String linha = p.getCodProduto() + ";" + 
                            p.getNome() + ";" + 
@@ -89,37 +90,30 @@ public class ProdutoRepository {
             linhas.add(linha);
         }
         
-        // Chama o método estático que o seu grupo desenvolveu
         ArquivoUtil.salvarDados(NOME_ARQUIVO, linhas);
     }
 
-    /**
-     * Lê o arquivo CSV através do ArquivoUtil e reconstrói a lista de produtos
-     */
     private static void carregarDoArquivo() {
         List<String> linhas = ArquivoUtil.carregarDados(NOME_ARQUIVO);
         
-        // Se o arquivo estiver vazio ou não existir, não faz nada
-        if (linhas.isEmpty()) {
+        if (linhas == null || linhas.isEmpty()) {
             return;
         }
         
         listaProdutos.clear();
         
-        // Começa do índice 1 para pular a primeira linha que é o cabeçalho (codProduto;nome...)
         for (int i = 1; i < linhas.size(); i++) {
             String linha = linhas.get(i);
-            
-            // Separa os dados usando o ponto e vírgula
             String[] dados = linha.split(";");
             
-            // Conversão dos tipos de dados puxados do texto
+            // Tratamento preventivo para linhas em branco no CSV
+            if (dados.length < 4) continue; 
+            
             int codProduto = Integer.parseInt(dados[0]);
             String nome = dados[1];
             double preco = Double.parseDouble(dados[2]);
             int quantidadeEstoque = Integer.parseInt(dados[3]);
             
-            // Cria o objeto e adiciona na lista estática
             Produto produto = new Produto();
             produto.setCodProduto(codProduto);
             produto.setNome(nome);
