@@ -195,51 +195,74 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-    
-    //Verifica se tem um cliente carregado para alterar
-    if (txtId.getText().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Primeiro, consulte um cliente para poder alterá-lo.");
-        return;
-    }
-    
-    //Pega o ID que estava estático e o novo nome que o usuário digitou
-    int id = Integer.parseInt(txtId.getText());
-    String novoNome = txtNome.getText();
-    
-    //Cria o objeto montado com as alterações
-    model.Cliente clienteAtualizado = new model.Cliente(id, novoNome);
-    
-    //Manda para a controller atualizar
-    clienteController.alterarCliente(clienteAtualizado);
-    
-    javax.swing.JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso!");
-    
-    //Limpa a tela e atualiza a JTable
-    txtId.setText("");
-    txtNome.setText("");
-    atualizarTabela();
+        //Pega a linha selecionada da tabela correta (tabelaClientes)
+        int linhaSelecionada = tabelaClientes.getSelectedRow();
+
+        if (linhaSelecionada == -1){
+            javax.swing.JOptionPane.showMessageDialog(
+                this, "Por favor, selecione um cliente na tabela para poder alterar!",
+                "Atenção", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        //Recupera os dados da linha selecionada e joga nos campos de texto para edição
+        int id = Integer.parseInt(tabelaClientes.getValueAt(linhaSelecionada, 0).toString());
+        String nomeAtual = tabelaClientes.getValueAt(linhaSelecionada, 1).toString();
+
+        //Se os campos estiverem vazios, preenche com o que clicou na tabela e deixa o usuário editar
+        if (txtId.getText().isEmpty()) {
+            txtId.setText(String.valueOf(id));
+            txtNome.setText(nomeAtual);
+            javax.swing.JOptionPane.showMessageDialog(this, "Dados carregados! Altere o nome no campo de texto e clique em Alterar novamente.");
+            return;
+        }
+
+        //Se já estava carregado, pega o novo nome que ele digitou e salva
+        int idCarregado = Integer.parseInt(txtId.getText());
+        String novoNome = txtNome.getText();
+
+        model.Cliente clienteAtualizado = new model.Cliente(idCarregado, novoNome);
+        clienteController.alterarCliente(clienteAtualizado);
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Cliente alterado com sucesso!");
+
+        //Limpa a tela e atualiza a JTable
+        txtId.setText("");
+        txtNome.setText("");
+        atualizarTabela();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-    
-    //Verifica se existe um ID carregado na tela
-    if (txtId.getText().isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Primeiro, consulte um cliente para poder excluí-lo.");
-        return;
-    }
-    
-    int id = Integer.parseInt(txtId.getText());
-    
-    //Manda a controller excluir
-    clienteController.excluirCliente(id);
-    
-    javax.swing.JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
-    
-    //Limpa os campos e atualiza a tabela
-    txtId.setText("");
-    txtNome.setText("");
-    atualizarTabela();
-    
+        //Pega a linha selecionada da tabela correta
+        int linhaSelecionada = tabelaClientes.getSelectedRow();
+
+        if (linhaSelecionada == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Por favor, selecione um cliente na tabela para poder excluir!", 
+                    "Atenção", 
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; 
+        }
+
+        //Pega o ID da linha selecionada
+        int idTabela = Integer.parseInt(tabelaClientes.getValueAt(linhaSelecionada, 0).toString());   
+
+        // Pergunta se quer mesmo excluir
+        int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "Deseja realmente excluir o cliente selecionado?", "Confirmar Exclusão", 
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+            //Manda a controller excluir
+            clienteController.excluirCliente(idTabela);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Cliente excluído com sucesso!");
+
+            //Limpa os campos e atualiza a tabela
+            txtId.setText("");
+            txtNome.setText("");
+            atualizarTabela();
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     public void atualizarTabela() {
