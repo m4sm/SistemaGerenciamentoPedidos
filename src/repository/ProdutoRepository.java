@@ -8,10 +8,10 @@ import util.ArquivoUtil; // Importando a classe que seus colegas fizeram
 public class ProdutoRepository {
     
     private static List<Produto> listaProdutos = new ArrayList<>();
-    private static final String NOME_ARQUIVO = "produtos.csv";
+    private static final String NOME_ARQUIVO = "data/produtos.csv";
 
-    // Bloco estático: Executa uma única vez quando a classe é carregada pelo Java.
-    // Serve para ler o arquivo CSV e preencher a lista ao abrir o programa.
+    
+    
     static {
         carregarDoArquivo();
     }

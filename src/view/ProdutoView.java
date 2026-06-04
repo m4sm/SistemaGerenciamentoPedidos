@@ -15,9 +15,37 @@ public class ProdutoView extends javax.swing.JFrame {
 
 
     public ProdutoView() {
-        initComponents();
-        produtoController = new ProdutoController();
-    }
+    initComponents();
+    produtoController = new ProdutoController();
+    
+    // Força manualmente o botão LISTAR a funcionar
+    btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAtualizarActionPerformed(evt);
+        }
+    });
+
+    // Força manualmente o botão CONSULTAR a funcionar
+    btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnConsultarActionPerformed(evt);
+        }
+    });
+
+    // Força manualmente o botão ALTERAR a funcionar
+    btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAlterarActionPerformed(evt);
+        }
+    });
+
+    // Força manualmente o botão EXCLUIR a funcionar
+    btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnExcluirActionPerformed(evt);
+        }
+    });
+}
 
 
     @SuppressWarnings("unchecked")
@@ -227,29 +255,29 @@ jDialog1.setVisible(true);
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
-        modoAlteracao = true;
-
         int linhaSelecionada = ID_produto.getSelectedRow();
-        if (linhaSelecionada == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
-            return;
-        }
+    
+    if (!jDialog1.isVisible()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, clique em 'Listar' ou 'Consultar' primeiro para visualizar os produtos.");
+        return;
+    }
 
+    if (linhaSelecionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para alterar!");
+        return;
+    }
 
-    //Resgata os dados da tabela e joga nos campos do Dialog
+    modoAlteracao = true;
+    btnIncluirConfirmar.setText("Salvar Alteração"); // Muda o texto do botão no JDialog
+
+    // Resgata os dados da tabela e joga nos campos do Dialog
     jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
     jTextField1.setEditable(false); 
-
-    jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
-    jTextField1.setEditable(false);
 
     jTextField2.setText(ID_produto.getValueAt(linhaSelecionada, 1).toString());
     jTextField3.setText(ID_produto.getValueAt(linhaSelecionada, 2).toString());
     jTextField4.setText(ID_produto.getValueAt(linhaSelecionada, 3).toString());
-
-    jDialog1.pack();
-    jDialog1.setLocationRelativeTo(this);
-    jDialog1.setVisible(true);
+    
 
     }//GEN-LAST:event_btnAlterarActionPerformed
 
@@ -262,44 +290,61 @@ jDialog1.setVisible(true);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int linhaSelecionada = ID_produto.getSelectedRow();
-if (linhaSelecionada == -1) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para excluir!");
-    return;
-}
-
-int codigo = Integer.parseInt(ID_produto.getValueAt(linhaSelecionada, 0).toString());
-String nome = ID_produto.getValueAt(linhaSelecionada, 1).toString();
-
-int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this, 
-        "Tem certeza que deseja excluir o produto: " + nome + "?", "Confirmar Exclusão", javax.swing.JOptionPane.YES_NO_OPTION);
-        
-if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
-    boolean excluiu = produtoController.removerProduto(codigo);
-    if (excluiu) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
-        btnConsultarActionPerformed(null); 
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir o produto.");
+        // Garante que a janela com a tabela está aberta
+    if (!jDialog1.isVisible()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Por favor, clique em 'Listar' primeiro para ver os produtos.");
+        return;
     }
-}
+
+    int linhaSelecionada = ID_produto.getSelectedRow();
+    if (linhaSelecionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Selecione um produto na tabela para excluir!");
+        return;
+    }
+
+    int codigo = Integer.parseInt(ID_produto.getValueAt(linhaSelecionada, 0).toString());
+    String nome = ID_produto.getValueAt(linhaSelecionada, 1).toString();
+
+    int confirmacao = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "Tem certeza que deseja excluir o produto: " + nome + "?", "Confirmar Exclusão", javax.swing.JOptionPane.YES_NO_OPTION);
+            
+    if (confirmacao == javax.swing.JOptionPane.YES_OPTION) {
+        boolean excluiu = produtoController.removerProduto(codigo);
+        if (excluiu) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Produto excluído com sucesso!");
+            preencherTabela(""); // <--- AQUI: Atualiza a tabela diretamente sem abrir popups extras
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir o produto.");
+        }
+    }
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        preencherTabela(""); // Passa vazio para listar tudo sem filtro
+                                            
+    preencherTabela(""); // Busca todos os dados e joga na tabela
+    
+    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA:
+    jDialog1.pack();
+    jDialog1.setLocationRelativeTo(this);
+    jDialog1.setVisible(true);
 
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-
-        String termoBusca = javax.swing.JOptionPane.showInputDialog(
+String termoBusca = javax.swing.JOptionPane.showInputDialog(
             this, "Digite o código ou parte do nome do produto:");
 
     if (termoBusca == null) {
         return;
     }
-        preencherTabela(termoBusca);
-
+    
+    preencherTabela(termoBusca); // Filtra os dados dentro da tabela
+    
+    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA COM O RESULTADO:
+    jDialog1.pack();
+    jDialog1.setLocationRelativeTo(this);
+    jDialog1.setVisible(true);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
