@@ -62,21 +62,29 @@ public class ProdutoRepository {
     }
 
     public List<Produto> consultar(String termoBusca) {
-        // CORREÇÃO CRUCIAL: Toda vez que listar ou consultar, lê o arquivo CSV do disco novamente
-        carregarDoArquivo(); 
-        
-        if (termoBusca == null || termoBusca.trim().isEmpty()) {
-            return listaProdutos;
-        }
-        List<Produto> resultado = new ArrayList<>();
-        for (Produto p : listaProdutos) {
-            String codigoStr = String.valueOf(p.getCodProduto());
-            if (codigoStr.equals(termoBusca) || p.getNome().toLowerCase().contains(termoBusca.toLowerCase())) {
-                resultado.add(p);
-            }
-        }
-        return resultado;
+
+    System.out.println("TESTE CONSULTAR EXECUTADO");
+    System.out.println("Arquivo esperado: " + NOME_ARQUIVO);
+
+    carregarDoArquivo();
+
+    if (termoBusca == null || termoBusca.trim().isEmpty()) {
+        return listaProdutos;
     }
+
+    List<Produto> resultado = new ArrayList<>();
+
+    for (Produto p : listaProdutos) {
+        String codigoStr = String.valueOf(p.getCodProduto());
+
+        if (codigoStr.equals(termoBusca)
+                || p.getNome().toLowerCase().contains(termoBusca.toLowerCase())) {
+            resultado.add(p);
+        }
+    }
+
+    return resultado;
+}
 
     private static void salvarNoArquivo() {
         List<String> linhas = new ArrayList<>();
