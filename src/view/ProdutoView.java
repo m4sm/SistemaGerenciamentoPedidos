@@ -380,45 +380,63 @@ try {
     }//GEN-LAST:event_btnIncluirConfirmarActionPerformed
 
     private void preencherTabela(String termoBusca) {
-    //Puxa a lista limpa da controller usando o termo de busca
-    java.util.List<model.Produto> lista = produtoController.listarProdutos(termoBusca);
 
-    //Pega o modelo da tabela
-    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) ID_produto.getModel();
+    // Busca os produtos
+    java.util.List<model.Produto> lista =
+            produtoController.listarProdutos(termoBusca);
 
-    //Limpa as linhas antigas
+    // DEBUG
+    System.out.println("=================================");
+    System.out.println("Quantidade de produtos: " + lista.size());
+
+    // Pega o modelo da tabela
+    javax.swing.table.DefaultTableModel modelo =
+            (javax.swing.table.DefaultTableModel) ID_produto.getModel();
+
+    // Limpa a tabela
     modelo.setRowCount(0);
 
-    //Joga os dados na tabela
+    // Adiciona os produtos
     for (model.Produto p : lista) {
-        Object[] linha = { p.getCodProduto(), p.getNome(), p.getPreco(), p.getQuantidadeEstoque() };
+
+        System.out.println(
+                "ID: " + p.getCodProduto()
+                + " | Nome: " + p.getNome()
+                + " | Preço: " + p.getPreco()
+                + " | Estoque: " + p.getQuantidadeEstoque()
+        );
+
+        Object[] linha = {
+            p.getCodProduto(),
+            p.getNome(),
+            p.getPreco(),
+            p.getQuantidadeEstoque()
+        };
+
         modelo.addRow(linha);
     }
-}
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ProdutoView().setVisible(true));
+    System.out.println("Linhas adicionadas na tabela: " + modelo.getRowCount());
+    System.out.println("=================================");
+}
+    public static void main(String args[]) {
+
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info :
+                javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
+            }
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
+
+    java.awt.EventQueue.invokeLater(() -> {
+        new ProdutoView().setVisible(true);
+    });
+}
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ID_produto;

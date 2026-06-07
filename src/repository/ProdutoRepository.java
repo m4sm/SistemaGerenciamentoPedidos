@@ -94,33 +94,66 @@ public class ProdutoRepository {
     }
 
     private static void carregarDoArquivo() {
-        List<String> linhas = ArquivoUtil.carregarDados(NOME_ARQUIVO);
-        
-        if (linhas == null || linhas.isEmpty()) {
-            return;
+
+    System.out.println("=================================");
+    System.out.println("Lendo arquivo: " + NOME_ARQUIVO);
+    System.out.println("=================================");
+
+    List<String> linhas = ArquivoUtil.carregarDados(NOME_ARQUIVO);
+
+    if (linhas == null) {
+        System.out.println("ERRO: Arquivo não encontrado ou retorno nulo.");
+        return;
+    }
+
+    System.out.println("Quantidade de linhas lidas: " + linhas.size());
+
+    if (linhas.isEmpty()) {
+        System.out.println("Arquivo vazio.");
+        return;
+    }
+
+    listaProdutos.clear();
+
+    for (int i = 1; i < linhas.size(); i++) {
+
+        String linha = linhas.get(i);
+        System.out.println("Linha lida: " + linha);
+
+        String[] dados = linha.split(";");
+
+        if (dados.length < 4) {
+            System.out.println("Linha ignorada (menos de 4 colunas): " + linha);
+            continue;
         }
-        
-        listaProdutos.clear();
-        
-        for (int i = 1; i < linhas.size(); i++) {
-            String linha = linhas.get(i);
-            String[] dados = linha.split(";");
-            
-            // Tratamento preventivo para linhas em branco no CSV
-            if (dados.length < 4) continue; 
-            
+
+        try {
             int codProduto = Integer.parseInt(dados[0]);
             String nome = dados[1];
             double preco = Double.parseDouble(dados[2]);
             int quantidadeEstoque = Integer.parseInt(dados[3]);
-            
+
             Produto produto = new Produto();
             produto.setCodProduto(codProduto);
             produto.setNome(nome);
             produto.setPreco(preco);
             produto.setQuantidadeEstoque(quantidadeEstoque);
-            
+
             listaProdutos.add(produto);
+
+            System.out.println(
+                "Produto carregado -> ID: " + codProduto +
+                " | Nome: " + nome +
+                " | Preço: " + preco +
+                " | Estoque: " + quantidadeEstoque
+            );
+
+        } catch (Exception e) {
+            System.out.println("Erro ao processar linha: " + linha);
+            e.printStackTrace();
         }
     }
+
+    System.out.println("Total de produtos carregados: " + listaProdutos.size());
+}
 }
