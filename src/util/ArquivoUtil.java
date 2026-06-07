@@ -24,15 +24,31 @@ public class ArquivoUtil {
 
     //Lê um arquivo qualquer e devolve uma lista de strings
     public static List<String> carregarDados(String nomeArquivo) {
-        List<String> linhas = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                linhas.add(linha);
-            }
-        } catch (IOException e) {
-            System.err.println("Arquivo " + nomeArquivo + " não encontrado. Criando um novo.");
+
+    List<String> linhas = new ArrayList<>();
+
+    System.out.println("=================================");
+    System.out.println("Tentando abrir: " + nomeArquivo);
+    System.out.println("=================================");
+
+    try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
+
+        String linha;
+
+        while ((linha = br.readLine()) != null) {
+            linhas.add(linha);
         }
-        return linhas;
+
+        System.out.println("Linhas carregadas: " + linhas.size());
+
+    } catch (IOException e) {
+
+        System.err.println("ERRO AO LER O ARQUIVO");
+        System.err.println("Arquivo: " + nomeArquivo);
+
+        e.printStackTrace();
     }
+
+    return linhas;
+}
 }
