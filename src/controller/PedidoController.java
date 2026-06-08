@@ -87,4 +87,45 @@ public class PedidoController {
             repository.alterar(pedido);
         }
     }
+
+    public java.util.List<model.Pedido> consultarPorCliente(int idCliente) {
+        PedidoRepository repository = new PedidoRepository();
+        
+        java.util.List<model.Pedido> todosPedidos = repository.listar();
+        java.util.List<model.Pedido> filtrados = new java.util.ArrayList<>();
+ 
+        for (model.Pedido p : todosPedidos) {
+            if (p.getIdCliente() == idCliente) {
+                filtrados.add(p);
+            }
+        }
+        return filtrados;
+    }
+    
+    public java.util.List<model.Pedido> consultarPorDatas(String dataInicio, String dataFim) {
+        PedidoRepository repository = new PedidoRepository();
+        java.util.List<model.Pedido> filtrados = new java.util.ArrayList<>();
+        
+        try {
+
+            java.time.format.DateTimeFormatter fmtBR = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            java.time.LocalDate inicio = java.time.LocalDate.parse(dataInicio, fmtBR);
+            java.time.LocalDate fim = java.time.LocalDate.parse(dataFim, fmtBR);
+            
+            java.util.List<model.Pedido> todosPedidos = repository.listar();
+
+            for (model.Pedido p : todosPedidos) {
+                java.time.LocalDate dataPedido = p.getDataPedido();
+ 
+                if (!dataPedido.isBefore(inicio) && !dataPedido.isAfter(fim)) {
+                    filtrados.add(p);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao converter datas: " + e.getMessage());
+        }
+        
+        return filtrados;
+    }
 }
