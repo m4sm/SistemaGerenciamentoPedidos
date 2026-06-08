@@ -316,29 +316,82 @@ public class PedidoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-    String idBusca = javax.swing.JOptionPane.showInputDialog(this, "Introduza o ID do Pedido que deseja consultar:");
+        String[] opcoes = {"Código do Pedido", "Cliente", "Intervalo de Datas"};
     
+        int escolha = javax.swing.JOptionPane.showOptionDialog(this,
+            "Como deseja pesquisar o pedido?", 
+            "Consultar Pedido",
+            javax.swing.JOptionPane.DEFAULT_OPTION, 
+            javax.swing.JOptionPane.QUESTION_MESSAGE,
+            null, 
+            opcoes, 
+            opcoes[0]);
+
+        javax.swing.table.DefaultTableModel TabelaDadosModel = (javax.swing.table.DefaultTableModel) TabelaDados.getModel();
+
+        if (escolha == 0) { 
+        String idBusca = javax.swing.JOptionPane.showInputDialog(this, "Introduza o ID do Pedido que deseja consultar:");
         if (idBusca != null && !idBusca.trim().isEmpty()) {
             try {
                 int id = Integer.parseInt(idBusca.trim());
                 model.Pedido p = pedidoController.consultarPedido(id);
-            
                 if (p != null) {
-                txtIdPedido.setText(String.valueOf(p.getIdPedido()));
-                txtIdCliente.setText(String.valueOf(p.getIdCliente()));
-                txtDataPedido.setText(p.getDataPedido().toString());
-                txtDataEntrega.setText(p.getDataEntrega().toString());
-                txtValorTotal.setText(String.valueOf(p.getValorTotal()));
-                
-                javax.swing.JOptionPane.showMessageDialog(this, "Pedido encontrado e carregado no ecrã!");
+                    TabelaDadosModel.setNumRows(0); 
+                    TabelaDadosModel.addRow(new Object[]{p.getIdPedido(), p.getIdCliente(), p.getDataPedido(), p.getDataEntrega(), p.getValorTotal()});
+                    javax.swing.JOptionPane.showMessageDialog(this, "Pedido encontrado!");
                 } else {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Pedido não encontrado no sistema.");
+                    javax.swing.JOptionPane.showMessageDialog(this, "Pedido não encontrado.");
+                }
+            } catch (NumberFormatException ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: O ID do Pedido deve ser um número.");
             }
-        } 
-            catch (NumberFormatException ex) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "O ID deve ser um número inteiro.");
         }
-       }
+
+    } else if (escolha == 1) {
+        String clienteBusca = javax.swing.JOptionPane.showInputDialog(this, "Introduza o ID numérico do Cliente:");
+        if (clienteBusca != null && !clienteBusca.trim().isEmpty()) {
+            try {
+
+                int idCliente = Integer.parseInt(clienteBusca.trim());
+                java.util.List<model.Pedido> listaClientes = pedidoController.consultarPorCliente(idCliente);
+                
+                if (listaClientes != null && !listaClientes.isEmpty()) {
+                    TabelaDadosModel.setNumRows(0); 
+                    for(model.Pedido p : listaClientes) {
+                        TabelaDadosModel.addRow(new Object[]{p.getIdPedido(), p.getIdCliente(), p.getDataPedido(), p.getDataEntrega(), p.getValorTotal()});
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Nenhum pedido encontrado para o Cliente ID: " + idCliente);
+                }
+            } catch (NumberFormatException ex) {
+  
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro: Por favor, digite apenas números para o ID do Cliente.");
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao buscar cliente: " + ex.getMessage());
+            }
+        }
+
+    } else if (escolha == 2) {
+        String dataInicioStr = javax.swing.JOptionPane.showInputDialog(this, "Data Inicial (DD/MM/AAAA):");
+        String dataFimStr = javax.swing.JOptionPane.showInputDialog(this, "Data Final (DD/MM/AAAA):");
+        
+        if (dataInicioStr != null && !dataInicioStr.trim().isEmpty() && dataFimStr != null && !dataFimStr.trim().isEmpty()) {
+            try {
+                java.util.List<model.Pedido> listaDatas = pedidoController.consultarPorDatas(dataInicioStr, dataFimStr);
+                
+                if (listaDatas != null && !listaDatas.isEmpty()) {
+                    TabelaDadosModel.setNumRows(0); 
+                    for(model.Pedido p : listaDatas) {
+                        TabelaDadosModel.addRow(new Object[]{p.getIdPedido(), p.getIdCliente(), p.getDataPedido(), p.getDataEntrega(), p.getValorTotal()});
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Nenhum pedido encontrado neste intervalo.");
+                }
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Erro ao buscar por datas. Verifique se digitou no formato correto (DD/MM/AAAA).\nDetalhe: " + ex.getMessage());
+            }
+        }
+    }
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
