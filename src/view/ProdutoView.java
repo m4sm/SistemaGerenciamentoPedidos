@@ -17,34 +17,6 @@ public class ProdutoView extends javax.swing.JFrame {
     public ProdutoView() {
     initComponents();
     produtoController = new ProdutoController();
-    
-    // Força manualmente o botão LISTAR a funcionar
-    btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAtualizarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão CONSULTAR a funcionar
-    btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnConsultarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão ALTERAR a funcionar
-    btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAlterarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão EXCLUIR a funcionar
-    btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnExcluirActionPerformed(evt);
-        }
-    });
 }
 
 
@@ -268,7 +240,9 @@ public class ProdutoView extends javax.swing.JFrame {
     }
 
     modoAlteracao = true;
-    btnIncluirConfirmar.setText("Salvar Alteração"); // Muda o texto do botão no JDialog
+
+btnIncluirConfirmar.setVisible(true);
+btnIncluirConfirmar.setText("Salvar Alteração");
 
     // Resgata os dados da tabela e joga nos campos do Dialog
     jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
@@ -322,9 +296,10 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
                                             
-    preencherTabela(""); // Busca todos os dados e joga na tabela
-    
-    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA:
+    preencherTabela("");
+
+    btnIncluirConfirmar.setVisible(false);
+
     jDialog1.pack();
     jDialog1.setLocationRelativeTo(this);
     jDialog1.setVisible(true);
@@ -332,16 +307,17 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-String termoBusca = javax.swing.JOptionPane.showInputDialog(
+btnIncluirConfirmar.setVisible(false);
+
+    String termoBusca = javax.swing.JOptionPane.showInputDialog(
             this, "Digite o código ou parte do nome do produto:");
 
     if (termoBusca == null) {
         return;
     }
-    
-    preencherTabela(termoBusca); // Filtra os dados dentro da tabela
-    
-    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA COM O RESULTADO:
+
+    preencherTabela(termoBusca);
+
     jDialog1.pack();
     jDialog1.setLocationRelativeTo(this);
     jDialog1.setVisible(true);
@@ -370,33 +346,17 @@ String termoBusca = javax.swing.JOptionPane.showInputDialog(
             double preco = Double.parseDouble(strPreco.replace(",", ".")); // Aceita ponto ou vírgula no preço
             int quantidade = Integer.parseInt(strQuantidade);
 
-            boolean sucesso;
-
-            // 4. Envia para a controller
-            if (modoAlteracao) {
-                sucesso = produtoController.atualizarProduto(codigo, nome, preco, quantidade);
-            } else {
-                sucesso = produtoController.cadastrarProduto(codigo, nome, preco, quantidade);
-            }
-
-            if (sucesso) {
-                javax.swing.JOptionPane.showMessageDialog(this, 
-                        modoAlteracao ? "Produto alterado com sucesso!" : "Produto cadastrado com sucesso!");
-                jDialog1.dispose(); // Fecha o formulário popup
-                preencherTabela(""); // Atualiza a tabela principal da tela
-            } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "Erro nas regras de negócio! Verifique os valores digitados.");
-            }
-
-        } catch (NumberFormatException e) {
-            // Se o usuário digitar letras no preço ou quantidade, ou se o nome da variável estiver errado
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro de formato: Certifique-se de usar números válidos em Preço e Remessa.");
-            System.out.println("DEBUG ERRO CONVERSÃO: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
-            e.printStackTrace();
-        }       // TODO add your handling code here:
+    if (sucesso) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+                modoAlteracao ? "Produto alterado com sucesso!" : "Produto cadastrado com sucesso!");
+        jDialog1.dispose();
+        preencherTabela(""); 
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Dados inválidos!");
+    }
+} catch (Exception e) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+}    // TODO add your handling code here:
     }//GEN-LAST:event_btnIncluirConfirmarActionPerformed
 
     private void preencherTabela(String termoBusca) {
