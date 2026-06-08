@@ -17,34 +17,6 @@ public class ProdutoView extends javax.swing.JFrame {
     public ProdutoView() {
     initComponents();
     produtoController = new ProdutoController();
-    
-    // Força manualmente o botão LISTAR a funcionar
-    btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAtualizarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão CONSULTAR a funcionar
-    btnConsultar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnConsultarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão ALTERAR a funcionar
-    btnAlterar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnAlterarActionPerformed(evt);
-        }
-    });
-
-    // Força manualmente o botão EXCLUIR a funcionar
-    btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnExcluirActionPerformed(evt);
-        }
-    });
 }
 
 
@@ -239,18 +211,24 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
 
-       int proximoCodigo = produtoController.obterProximoCodigo();
-jTextField1.setText(String.valueOf(proximoCodigo));
-jTextField1.setEditable(false); 
+       btnIncluirConfirmar.setVisible(true);
+    btnIncluirConfirmar.setText("Incluir");
 
-modoAlteracao = false;
-jTextField2.setText("");
-jTextField3.setText("");
-jTextField4.setText("");
+    int proximoCodigo = produtoController.obterProximoCodigo();
 
-jDialog1.pack();
-jDialog1.setLocationRelativeTo(this);
-jDialog1.setVisible(true);
+    jTextField1.setText(String.valueOf(proximoCodigo));
+    jTextField1.setEditable(false);
+
+    modoAlteracao = false;
+
+    jTextField2.setText("");
+    jTextField3.setText("");
+    jTextField4.setText("");
+
+    jDialog1.pack();
+    jDialog1.setLocationRelativeTo(this);
+    jDialog1.setVisible(true);
+
     }//GEN-LAST:event_btnIncluirActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -268,7 +246,9 @@ jDialog1.setVisible(true);
     }
 
     modoAlteracao = true;
-    btnIncluirConfirmar.setText("Salvar Alteração"); // Muda o texto do botão no JDialog
+
+btnIncluirConfirmar.setVisible(true);
+btnIncluirConfirmar.setText("Salvar Alteração");
 
     // Resgata os dados da tabela e joga nos campos do Dialog
     jTextField1.setText(ID_produto.getValueAt(linhaSelecionada, 0).toString());
@@ -322,9 +302,10 @@ jDialog1.setVisible(true);
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
                                             
-    preencherTabela(""); // Busca todos os dados e joga na tabela
-    
-    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA:
+    preencherTabela("");
+
+    btnIncluirConfirmar.setVisible(false);
+
     jDialog1.pack();
     jDialog1.setLocationRelativeTo(this);
     jDialog1.setVisible(true);
@@ -332,16 +313,17 @@ jDialog1.setVisible(true);
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-String termoBusca = javax.swing.JOptionPane.showInputDialog(
+btnIncluirConfirmar.setVisible(false);
+
+    String termoBusca = javax.swing.JOptionPane.showInputDialog(
             this, "Digite o código ou parte do nome do produto:");
 
     if (termoBusca == null) {
         return;
     }
-    
-    preencherTabela(termoBusca); // Filtra os dados dentro da tabela
-    
-    // FORÇA A JANELA ONDE A TABELA ESTÁ A APARECER NA TELA COM O RESULTADO:
+
+    preencherTabela(termoBusca);
+
     jDialog1.pack();
     jDialog1.setLocationRelativeTo(this);
     jDialog1.setVisible(true);
@@ -376,7 +358,7 @@ try {
     }
 } catch (Exception e) {
     javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-}        // TODO add your handling code here:
+}    // TODO add your handling code here:
     }//GEN-LAST:event_btnIncluirConfirmarActionPerformed
 
     private void preencherTabela(String termoBusca) {
