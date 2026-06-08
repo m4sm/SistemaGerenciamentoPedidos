@@ -328,35 +328,85 @@ btnIncluirConfirmar.setVisible(false);
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void btnIncluirConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirConfirmarActionPerformed
-        try {
-            // 1. Pega os textos das caixas e remove espaços em branco extras
-            String strCodigo = jTextField1.getText().trim();
-            String nome = jTextField2.getText().trim();
-            String strPreco = jTextField3.getText().trim();
-            String strQuantidade = jTextField4.getText().trim();
 
-            // 2. Validação visual básica: Não deixa avançar com campos vazios
-            if (nome.isEmpty() || strPreco.isEmpty() || strQuantidade.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos antes de salvar!");
-                return;
-            }
+    try {
 
-            // 3. Converte os valores com segurança
-            int codigo = Integer.parseInt(strCodigo);
-            double preco = Double.parseDouble(strPreco.replace(",", ".")); // Aceita ponto ou vírgula no preço
-            int quantidade = Integer.parseInt(strQuantidade);
+        String strCodigo = jTextField1.getText().trim();
+        String nome = jTextField2.getText().trim();
+        String strPreco = jTextField3.getText().trim();
+        String strQuantidade = jTextField4.getText().trim();
 
-    if (sucesso) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-                modoAlteracao ? "Produto alterado com sucesso!" : "Produto cadastrado com sucesso!");
-        jDialog1.dispose();
-        preencherTabela(""); 
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Dados inválidos!");
+        if (nome.isEmpty() || strPreco.isEmpty() || strQuantidade.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Por favor, preencha todos os campos antes de salvar!"
+            );
+            return;
+        }
+
+        int codigo = Integer.parseInt(strCodigo);
+        double preco = Double.parseDouble(strPreco.replace(",", "."));
+        int quantidade = Integer.parseInt(strQuantidade);
+
+        boolean sucesso;
+
+        if (modoAlteracao) {
+
+            sucesso = produtoController.atualizarProduto(
+                    codigo,
+                    nome,
+                    preco,
+                    quantidade
+            );
+
+        } else {
+
+            sucesso = produtoController.cadastrarProduto(
+                    codigo,
+                    nome,
+                    preco,
+                    quantidade
+            );
+
+        }
+
+        if (sucesso) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    modoAlteracao
+                            ? "Produto alterado com sucesso!"
+                            : "Produto cadastrado com sucesso!"
+            );
+
+            jDialog1.dispose();
+            preencherTabela("");
+
+        } else {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Dados inválidos!"
+            );
+
+        }
+
+    } catch (NumberFormatException e) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro de formato. Verifique os campos Preço e Remessa."
+        );
+
+    } catch (Exception e) {
+
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Erro: " + e.getMessage()
+        );
+
+        e.printStackTrace();
     }
-} catch (Exception e) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-}    // TODO add your handling code here:
     }//GEN-LAST:event_btnIncluirConfirmarActionPerformed
 
     private void preencherTabela(String termoBusca) {
