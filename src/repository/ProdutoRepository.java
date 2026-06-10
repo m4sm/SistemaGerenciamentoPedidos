@@ -9,10 +9,10 @@ public class ProdutoRepository {
     
     private static List<Produto> listaProdutos = new ArrayList<>();
     
-    // Simplificado para o padrão relativo estável que funcionou no módulo de clientes
+    
     private static final String NOME_ARQUIVO = "data/produtos.csv";
 
-    // O bloco static garante que o arquivo só será lido UMA vez ao abrir o sistema
+    
     static {
         carregarDoArquivo();
     }
@@ -73,7 +73,7 @@ public class ProdutoRepository {
     private static void salvarNoArquivo() {
         List<String> linhas = new ArrayList<>();
         
-        // Mantendo o cabeçalho que ele estruturou
+        
         linhas.add("codProduto;nome;preco;quantidadeEstoque");
         
         for (Produto p : listaProdutos) {
@@ -96,7 +96,7 @@ public class ProdutoRepository {
 
         listaProdutos.clear();
 
-        // Começa do 1 para pular a linha de cabeçalho "codProduto;nome..."
+        
         for (int i = 1; i < linhas.size(); i++) {
             String linha = linhas.get(i);
             String[] dados = linha.split(";");
