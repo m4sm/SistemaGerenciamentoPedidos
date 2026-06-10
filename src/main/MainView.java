@@ -38,7 +38,7 @@ public class MainView extends javax.swing.JFrame {
         btnProdutos.setText("Gerenciar Produtos");
         btnProdutos.addActionListener(this::btnProdutosActionPerformed);
 
-        btnPedidos.setBackground(new java.awt.Color(204, 255, 204));
+        btnPedidos.setBackground(new java.awt.Color(0, 102, 255));
         btnPedidos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnPedidos.setForeground(new java.awt.Color(255, 255, 255));
         btnPedidos.setText("Gerenciar Pedidos");
