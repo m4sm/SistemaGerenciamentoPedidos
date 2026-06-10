@@ -149,22 +149,27 @@ public class ProdutoView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gerenciamento de Produtos");
 
+        btnIncluir.setBackground(new java.awt.Color(51, 51, 255));
         btnIncluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnIncluir.setText("Adicionar");
         btnIncluir.addActionListener(this::btnIncluirActionPerformed);
 
+        btnAlterar.setBackground(new java.awt.Color(0, 102, 0));
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(this::btnAlterarActionPerformed);
 
+        btnExcluir.setBackground(new java.awt.Color(153, 0, 0));
         btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(this::btnExcluirActionPerformed);
 
+        btnConsultar.setBackground(new java.awt.Color(102, 102, 0));
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(this::btnConsultarActionPerformed);
 
+        btnAtualizar.setBackground(new java.awt.Color(51, 0, 51));
         btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAtualizar.setText("Listar");
         btnAtualizar.addActionListener(this::btnAtualizarActionPerformed);
@@ -176,17 +181,17 @@ public class ProdutoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(btnIncluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnConsultar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnAlterar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(btnAtualizar)
-                .addGap(30, 30, 30)
+                .addGap(92, 92, 92)
+                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(btnExcluir)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -201,9 +206,9 @@ public class ProdutoView extends javax.swing.JFrame {
                     .addComponent(btnAlterar))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtualizar)
-                    .addComponent(btnExcluir))
-                .addContainerGap(116, Short.MAX_VALUE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
