@@ -26,7 +26,7 @@ public class MainView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Sistema de Gerenciamento de Pedidos");
 
-        btnClientes.setBackground(new java.awt.Color(51, 51, 255));
+        btnClientes.setBackground(new java.awt.Color(102, 0, 255));
         btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnClientes.setForeground(new java.awt.Color(255, 255, 255));
         btnClientes.setText("Gerenciar Clientes");
