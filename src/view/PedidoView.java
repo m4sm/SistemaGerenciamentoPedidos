@@ -39,12 +39,13 @@ public class PedidoView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaDados = new javax.swing.JTable();
+        btnGerenciarItens = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 20)); // NOI18N
-        jLabel1.setText("GERENCIAMENTO DE PEDIDOS");
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel1.setText("Gerenciamento de Pedidos");
         jLabel1.setToolTipText("");
 
         btnIncluir.setBackground(new java.awt.Color(0, 204, 102));
@@ -109,6 +110,13 @@ public class PedidoView extends javax.swing.JFrame {
     ));
     jScrollPane1.setViewportView(TabelaDados);
 
+    btnGerenciarItens.setBackground(new java.awt.Color(51, 0, 51));
+    btnGerenciarItens.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+    btnGerenciarItens.setForeground(new java.awt.Color(255, 255, 255));
+    btnGerenciarItens.setText("GERENCIAR ITENS");
+    btnGerenciarItens.addActionListener(this::btnGerenciarItensActionPerformed);
+    
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -150,49 +158,52 @@ public class PedidoView extends javax.swing.JFrame {
                         .addComponent(JLabel1))
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGap(31, 31, 31)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addComponent(btnGerenciarItens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(35, 35, 35))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jLabel1)
-                    .addGap(40, 40, 40)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(JLabel1)
-                        .addComponent(jLabel11))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDataPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jLabel12)
-                    .addGap(2, 2, 2)
-                    .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(34, 34, 34)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jLabel1)
+            .addGap(40, 40, 40)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(JLabel1)
+                .addComponent(jLabel11))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel8)
+                .addComponent(jLabel9))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(txtIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jLabel12)
+            .addGap(2, 2, 2)
+            .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(34, 34, 34)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnGerenciarItens, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(38, 38, 38))
     );
 
     pack();
@@ -409,6 +420,26 @@ public class PedidoView extends javax.swing.JFrame {
       
     }//GEN-LAST:event_txtIdClienteActionPerformed
 
+    private void btnGerenciarItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarItensActionPerformed
+
+    int linhaSelecionada = TabelaDados.getSelectedRow();
+    String idTexto = txtIdPedido.getText().trim();
+
+    if (idTexto.isEmpty() && linhaSelecionada == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Por favor, selecione um pedido na tabela ou digite o ID do Pedido antes de gerenciar os itens.", 
+            "Aviso", 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    view.ItemView telaItens = new view.ItemView();
+
+    telaItens.setLocationRelativeTo(this); 
+
+    telaItens.setVisible(true);
+    }//GEN-LAST:event_btnGerenciarItensActionPerformed
+
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -444,6 +475,7 @@ public class PedidoView extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnGerenciarItens;
     private javax.swing.JButton btnIncluir;
     private javax.swing.JButton btnListar;
     private javax.swing.JLabel jLabel1;
