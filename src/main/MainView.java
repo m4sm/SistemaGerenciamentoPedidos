@@ -28,16 +28,19 @@ public class MainView extends javax.swing.JFrame {
 
         btnClientes.setBackground(new java.awt.Color(51, 51, 255));
         btnClientes.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnClientes.setForeground(new java.awt.Color(255, 255, 255));
         btnClientes.setText("Gerenciar Clientes");
         btnClientes.addActionListener(this::btnClientesActionPerformed);
 
         btnProdutos.setBackground(new java.awt.Color(0, 153, 255));
         btnProdutos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnProdutos.setForeground(new java.awt.Color(255, 255, 255));
         btnProdutos.setText("Gerenciar Produtos");
         btnProdutos.addActionListener(this::btnProdutosActionPerformed);
 
         btnPedidos.setBackground(new java.awt.Color(204, 255, 204));
         btnPedidos.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnPedidos.setForeground(new java.awt.Color(255, 255, 255));
         btnPedidos.setText("Gerenciar Pedidos");
         btnPedidos.addActionListener(this::btnPedidosActionPerformed);
 
