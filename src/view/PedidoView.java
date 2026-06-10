@@ -422,17 +422,6 @@ public class PedidoView extends javax.swing.JFrame {
 
     private void btnGerenciarItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarItensActionPerformed
 
-    int linhaSelecionada = TabelaDados.getSelectedRow();
-    String idTexto = txtIdPedido.getText().trim();
-
-    if (idTexto.isEmpty() && linhaSelecionada == -1) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Por favor, selecione um pedido na tabela ou digite o ID do Pedido antes de gerenciar os itens.", 
-            "Aviso", 
-            javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-
     view.ItemView telaItens = new view.ItemView();
 
     telaItens.setLocationRelativeTo(this); 
