@@ -10,7 +10,7 @@ public class Produto {
     public Produto() {
     }
 
-    // Construtor Completo (Corrigido para o Controller usar)
+    
     public Produto(int codProduto, String nome, double preco, int quantidadeEstoque) {
         this.codProduto = codProduto;
         this.nome = nome;

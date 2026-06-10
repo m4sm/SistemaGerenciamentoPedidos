@@ -415,7 +415,7 @@ btnIncluirConfirmar.setVisible(false);
     java.util.List<model.Produto> lista =
             produtoController.listarProdutos(termoBusca);
 
-    // DEBUG
+    
     System.out.println("=================================");
     System.out.println("Quantidade de produtos: " + lista.size());
 

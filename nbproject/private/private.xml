@@ -5,6 +5,8 @@
         <group>
             <file>file:/home/guilherme/NetBeansProjects/SistemaGerenciamentoPedidos/src/view/ProdutoView.java</file>
             <file>file:/home/guilherme/NetBeansProjects/SistemaGerenciamentoPedidos/src/repository/ProdutoRepository.java</file>
+            <file>file:/home/guilherme/NetBeansProjects/SistemaGerenciamentoPedidos/src/controller/ItemController.java</file>
+            <file>file:/home/guilherme/NetBeansProjects/SistemaGerenciamentoPedidos/src/main/MainView.java</file>
         </group>
     </open-files>
 </project-private>
