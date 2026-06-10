@@ -5,8 +5,7 @@ import repository.PedidoRepository;
 import java.util.ArrayList;
 
 public class PedidoController {
-    
-    // O Controller cria uma instância do Repositório para poder usá-lo
+
     private final PedidoRepository repository;
 
     public PedidoController() {
@@ -14,22 +13,18 @@ public class PedidoController {
     }
     
     public void incluirPedido(Pedido p){
-        // Manda o repositório incluir no arquivo
         repository.incluir(p);
     }
     
     public void alterarPedido(Pedido p){
-        // Manda o repositório alterar no arquivo
         repository.alterar(p);
     }
     
     public Pedido consultarPedido(int id){
-        // Pede para o repositório buscar o pedido
         return repository.consultar(id);
     }
     
     public void excluirPedido(int id){
-        // Manda o repositório excluir
         repository.excluir(id);
     }
     
