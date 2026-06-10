@@ -41,7 +41,7 @@ public class PedidoView extends javax.swing.JFrame {
         TabelaDados = new javax.swing.JTable();
         btnGerenciarItens = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
